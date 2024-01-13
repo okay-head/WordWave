@@ -1,7 +1,49 @@
 import Container from '../shared/Container'
 import ErrorSvg from './ErrorSvg'
+import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import z from 'zod'
 
 export default function SignUp() {
+  const formSchema = z.object({
+    email: z
+      .string()
+      .trim()
+      .toLowerCase()
+      .min(1, 'Please enter your email')
+      .email(),
+    password: z
+      .string()
+      .trim()
+      .min(1, 'Please enter your password')
+      .min(8, 'Password must be min 8 characters long'),
+    'confirm-password': z
+      .string()
+      .trim()
+      .min(1, 'Please enter your password')
+      .min(8, 'Password must be min 8 characters long')
+      .refine((x) => x === passVal, { message: "Passwords don't match" }),
+  })
+
+  type TForm = z.infer<typeof formSchema>
+
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      'confirm-password': '',
+    },
+  })
+
+  const passVal: string = watch('password')
+  const onSubmit: SubmitHandler<TForm> = (values) => console.log(values)
+  const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
   return (
     <Container classVars='bg-gray-100 dark:bg-slate-900'>
       <div className='signupPage grid-cols-2 gap-4 md:grid'>
@@ -75,7 +117,7 @@ export default function SignUp() {
                 </div>
 
                 {/* <!-- Form --> */}
-                <form>
+                <form onSubmit={handleSubmit(onSubmit, onError)}>
                   <div className='grid gap-y-4'>
                     {/* <!-- Form Group --> */}
                     <div>
@@ -87,21 +129,18 @@ export default function SignUp() {
                       </label>
                       <div className='relative'>
                         <input
+                          {...register('email')}
                           type='email'
                           id='email'
                           name='email'
                           className='block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-accent-pink-500 focus:ring-accent-pink-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600'
-                          required
                           aria-describedby='email-error'
                         />
-                        <ErrorSvg />
+                        {errors?.email && <ErrorSvg />}
                       </div>
-                      <p
-                        className='mt-2 hidden text-xs text-red-600'
-                        id='email-error'
-                      >
-                        Please include a valid email address so we can get back
-                        to you
+
+                      <p className='mt-2 text-xs text-red-600' id='email-error'>
+                        {errors?.email?.message}
                       </p>
                     </div>
                     <div>
@@ -113,20 +152,20 @@ export default function SignUp() {
                       </label>
                       <div className='relative'>
                         <input
+                          {...register('password')}
                           type='password'
                           id='password'
                           name='password'
                           className='block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-accent-pink-500 focus:ring-accent-pink-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600'
-                          required
                           aria-describedby='password-error'
                         />
-                        <ErrorSvg />
+                        {errors?.password && <ErrorSvg />}
                       </div>
                       <p
-                        className='mt-2 hidden text-xs text-red-600'
+                        className='mt-2  text-xs text-red-600'
                         id='password-error'
                       >
-                        8+ characters required
+                        {errors?.password?.message}
                       </p>
                     </div>
                     <div>
@@ -138,20 +177,21 @@ export default function SignUp() {
                       </label>
                       <div className='relative'>
                         <input
+                          {...register('confirm-password')}
                           type='password'
                           id='confirm-password'
                           name='confirm-password'
                           className='block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-accent-pink-500 focus:ring-accent-pink-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600'
-                          required
                           aria-describedby='confirm-password-error'
                         />
-                        <ErrorSvg />
+                        {errors['confirm-password'] && <ErrorSvg />}
                       </div>
                       <p
-                        className='mt-2 hidden text-xs text-red-600'
+                        className='mt-2 text-xs text-red-600'
                         id='confirm-password-error'
                       >
-                        Password does not match the password
+                        {errors['confirm-password'] &&
+                          errors['confirm-password'].message}
                       </p>
                     </div>
                     {/* <!-- End Form Group --> */}
@@ -171,7 +211,7 @@ export default function SignUp() {
             </div>
           </div>
         </article>
-      </div>{' '}
+      </div>
     </Container>
   )
 }

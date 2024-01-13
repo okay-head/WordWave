@@ -1,12 +1,7 @@
 export default function ErrorSvg() {
-  const err: boolean = false
   return (
     <div>
-      <div
-        className={`pointer-events-none absolute inset-y-0 end-0 hidden items-center pe-3 ${
-          err && 'flex'
-        }`}
-      >
+      <div className='pointer-events-none absolute inset-y-0 end-0 flex items-center pe-3'>
         <svg
           className='h-5 w-5 text-red-500'
           width='16'
