@@ -61,7 +61,7 @@ export default function SignUp() {
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
   return (
-    <Container classVars='bg-gray-100 dark:bg-slate-900'>
+    <Container classVars=''>
       <div className='signupPage grid-cols-2 gap-4 md:grid'>
         <article className='hero-img-signup order-1 hidden place-items-center pt-8 md:grid'>
           <img

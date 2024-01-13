@@ -52,9 +52,9 @@ export default function SignIn() {
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
   return (
-    <Container classVars='my-auto'>
+    <Container classVars='mt-24'>
       <div className='signinPage h-full grid-cols-2 gap-4 md:grid'>
-        <article className='hero-img-signin order-1 hidden h-full place-items-center pt-8 md:grid'>
+        <article className='hero-img-signin hidden h-full place-items-center md:grid'>
           <img
             src='/assets/signin-light.svg'
             alt='hero-img-signin'
