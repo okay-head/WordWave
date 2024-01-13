@@ -1,3 +1,5 @@
+import Logo from './Logo'
+
 export default function Navbar() {
   return (
     <div className='navbar-container'>
@@ -8,11 +10,11 @@ export default function Navbar() {
         >
           <div className='flex items-center justify-between'>
             <a
-              className='flex-none text-xl font-semibold dark:text-white'
+              className='w-[160px] flex-none rounded-md bg-white text-xl font-semibold dark:text-white'
               href='#'
               aria-label='Brand'
             >
-              WordWave
+              <Logo />
             </a>
             <div className='sm:hidden'>
               <button
@@ -52,29 +54,16 @@ export default function Navbar() {
           >
             <div className='mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-7 sm:gap-y-0 sm:ps-7'>
               <a
-                className='font-medium text-blue-600 dark:text-blue-500 sm:py-6'
+                className='py-1 font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-5'
                 href='#'
-                aria-current='page'
               >
-                Landing
+                Feed
               </a>
               <a
-                className='font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
+                className='py-1 font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-5'
                 href='#'
               >
-                Account
-              </a>
-              <a
-                className='font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
-                href='#'
-              >
-                Work
-              </a>
-              <a
-                className='font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
-                href='#'
-              >
-                Blog
+                Users
               </a>
 
               <div className='hs-dropdown [--adaptive:none] [--strategy:static] sm:py-4 sm:[--strategy:fixed] sm:[--trigger:hover]'>
@@ -82,7 +71,17 @@ export default function Navbar() {
                   type='button'
                   className='flex w-full items-center font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 '
                 >
-                  Dropdown
+                  <svg
+                    className='me-2 mt-[2px] h-4 w-4 flex-shrink-0'
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    fill='currentColor'
+                    viewBox='0 0 16 16'
+                  >
+                    <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z' />
+                  </svg>
+                  Profile
                   <svg
                     className='ms-2 h-2.5 w-2.5 text-gray-600'
                     width='16'
@@ -166,23 +165,6 @@ export default function Navbar() {
                   </a>
                 </div>
               </div>
-
-              <a
-                className='flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500 sm:my-6 sm:border-s sm:border-gray-300 sm:ps-6'
-                href='#'
-              >
-                <svg
-                  className='h-4 w-4 flex-shrink-0'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='16'
-                  height='16'
-                  fill='currentColor'
-                  viewBox='0 0 16 16'
-                >
-                  <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z' />
-                </svg>
-                Log in
-              </a>
             </div>
           </div>
         </nav>

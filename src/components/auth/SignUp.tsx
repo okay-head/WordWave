@@ -17,7 +17,7 @@ export default function SignUp() {
           id='signUpBox'
           className='mx-auto w-full max-w-md items-center'
         >
-          <div className='rounded-xl  dark:border-gray-700 dark:bg-gray-800'>
+          <div className='rounded-xl bg-white dark:border-gray-700 dark:bg-gray-800'>
             <div className='p-4 sm:p-7'>
               <div className='text-center'>
                 <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
