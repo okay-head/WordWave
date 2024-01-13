@@ -3,9 +3,9 @@ import Logo from './Logo'
 export default function Navbar() {
   return (
     <div className='navbar-container'>
-      <header className='z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0'>
+      <header className='z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm shadow-lg dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0'>
         <nav
-          className='relative mx-auto w-full max-w-7xl px-4 sm:flex sm:items-center sm:justify-between sm:px-6 md:px-10 lg:px-12'
+          className='relative mx-auto w-full max-w-7xl px-4 sm:flex sm:items-center sm:justify-between sm:px-6 md:px-8'
           aria-label='Global'
         >
           <div className='flex items-center justify-between'>
@@ -54,13 +54,13 @@ export default function Navbar() {
           >
             <div className='mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-7 sm:gap-y-0 sm:ps-7'>
               <a
-                className='py-1 font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-5'
+                className='py-1 font-medium hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
                 href='#'
               >
                 Feed
               </a>
               <a
-                className='py-1 font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-5'
+                className='py-1 font-medium hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
                 href='#'
               >
                 Users
@@ -69,7 +69,7 @@ export default function Navbar() {
               <div className='hs-dropdown [--adaptive:none] [--strategy:static] sm:py-4 sm:[--strategy:fixed] sm:[--trigger:hover]'>
                 <button
                   type='button'
-                  className='flex w-full items-center font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 '
+                  className='flex w-full items-center font-medium hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 '
                 >
                   <svg
                     className='me-2 mt-[2px] h-4 w-4 flex-shrink-0'

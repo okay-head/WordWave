@@ -17,7 +17,7 @@ export default function SignUp() {
           id='signUpBox'
           className='mx-auto w-full max-w-md items-center'
         >
-          <div className='rounded-xl bg-white dark:border-gray-700 dark:bg-gray-800'>
+          <div className='rounded-xl bg-white shadow-md dark:border-gray-700 dark:bg-gray-800'>
             <div className='p-4 sm:p-7'>
               <div className='text-center'>
                 <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
@@ -104,9 +104,6 @@ export default function SignUp() {
                         to you
                       </p>
                     </div>
-                    {/* <!-- End Form Group --> */}
-
-                    {/* <!-- Form Group --> */}
                     <div>
                       <label
                         htmlFor='password'
@@ -132,9 +129,6 @@ export default function SignUp() {
                         8+ characters required
                       </p>
                     </div>
-                    {/* <!-- End Form Group --> */}
-
-                    {/* <!-- Form Group --> */}
                     <div>
                       <label
                         htmlFor='confirm-password'
@@ -162,36 +156,9 @@ export default function SignUp() {
                     </div>
                     {/* <!-- End Form Group --> */}
 
-                    {/* <!-- Checkbox --> */}
-                    <div className='flex items-center'>
-                      <div className='flex'>
-                        <input
-                          id='remember-me'
-                          name='remember-me'
-                          type='checkbox'
-                          className='pointer-events-none mt-0.5 shrink-0 rounded border-gray-200 text-accent-pink-600 focus:ring-accent-pink-500 dark:border-gray-700 dark:bg-gray-800 dark:text-accent-pink-900 dark:checked:border-accent-pink-900 dark:checked:bg-accent-pink-900 dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800'
-                        />
-                      </div>
-                      <div className='ms-3'>
-                        <label
-                          htmlFor='remember-me'
-                          className='text-sm dark:text-white'
-                        >
-                          I accept the{' '}
-                          <a
-                            className='font-medium text-accent-pink-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus-visible:ring-accent-pink-500 dark:text-accent-pink-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                            href='#'
-                          >
-                            Terms and Conditions
-                          </a>
-                        </label>
-                      </div>
-                    </div>
-                    {/* <!-- End Checkbox --> */}
-
                     <button
                       type='submit'
-                      className='dark:focus-visible:ring-accent-gray-600 inline-flex w-full items-center 
+                      className='dark:focus-visible:ring-accent-gray-600 mt-3 inline-flex w-full items-center 
                     justify-center gap-x-2 rounded-lg 
                     border border-transparent bg-accent-pink-600 px-4 py-3 text-sm font-semibold text-white hover:bg-accent-pink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-pink-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-accent-pink-900 dark:hover:bg-accent-pink-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                     >
