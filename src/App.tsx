@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-
+import { Toaster } from 'react-hot-toast'
 import 'preline/preline'
 import { IStaticMethods } from 'preline/preline'
 import SignUp from './components/auth/SignUp'
@@ -22,6 +22,7 @@ export default function App() {
     <div className='app'>
       <Navbar />
       <SignUp />
+      <Toaster />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import ErrorSvg from './ErrorSvg'
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
+import toast from 'react-hot-toast'
 
 export default function SignUp() {
   const formSchema = z.object({
@@ -32,7 +33,7 @@ export default function SignUp() {
     register,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<TForm>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
@@ -42,7 +43,22 @@ export default function SignUp() {
   })
 
   const passVal: string = watch('password')
-  const onSubmit: SubmitHandler<TForm> = (values) => console.log(values)
+  const onSubmit: SubmitHandler<TForm> = (values) => {
+    const toast1 = toast.success('Successfully created!')
+    const timeOut = new Promise((resolve) => {
+      setTimeout(() => {
+        toast.dismiss(toast1)
+        resolve('')
+      }, 800)
+    })
+    // only launch this after the above toast gets dismissed
+    timeOut.then(() => toast.loading('Redirecting'))
+
+    setTimeout(() => {
+      toast.dismiss()
+      console.log(values)
+    }, 3000)
+  }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
   return (
     <Container classVars='bg-gray-100 dark:bg-slate-900'>
