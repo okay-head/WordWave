@@ -3,7 +3,7 @@ import Logo from './Logo'
 export default function Navbar() {
   return (
     <div className='navbar-container'>
-      <header className='z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm shadow-lg dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0'>
+      <header className='z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm shadow-md dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0'>
         <nav
           className='relative mx-auto w-full max-w-7xl px-4 sm:flex sm:items-center sm:justify-between sm:px-6 md:px-8'
           aria-label='Global'
