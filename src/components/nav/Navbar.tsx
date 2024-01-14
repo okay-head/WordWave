@@ -1,6 +1,22 @@
+import { NavLink } from 'react-router-dom'
 import Logo from './Logo'
 
 export default function Navbar() {
+  const Anchor = (
+    id: string,
+    to: string,
+    children: React.ReactNode,
+    classVars: string = '',
+  ) => (
+    <NavLink
+      id={id}
+      className={`py-1 font-medium tracking-wide transition-all hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500 sm:my-4 sm:px-1 ${classVars}`}
+      to={to}
+    >
+      {children}
+    </NavLink>
+  )
+
   return (
     <div className='navbar-container'>
       <header className='z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm shadow-md dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0'>
@@ -52,25 +68,30 @@ export default function Navbar() {
             id='navbar-collapse-with-animation'
             className='hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 sm:block'
           >
-            <div className='mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-7 sm:gap-y-0 sm:ps-7'>
-              <a
-                className='py-1 font-medium tracking-wide hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
-                href='#'
-              >
-                Feed
-              </a>
-              <a
-                className='py-1 font-medium tracking-wide hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
-                href='#'
-              >
-                Users
-              </a>
+            <div className='mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-6 sm:gap-y-0 sm:ps-7'>
+              {Anchor('feed', '/', 'Feed')}
+              {Anchor('users', '/users', 'Users')}
+              {Anchor(
+                'profile',
+                '/profile',
+                <div className='flex items-center'>
+                  <svg
+                    className='me-2 mt-[2px] h-4 w-4 flex-shrink-0'
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    fill='currentColor'
+                    viewBox='0 0 16 16'
+                  >
+                    <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z' />
+                  </svg>
+                  Profile
+                </div>,
+              )}
 
-              <div className='hs-dropdown [--adaptive:none] [--strategy:static] sm:py-4 sm:[--strategy:fixed] sm:[--trigger:hover]'>
-                <button
-                  type='button'
-                  className='flex w-full items-center font-medium tracking-wide hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500'
-                >
+              {/* --- disabled dropdown menu ---- */}
+              {/* <div className='hs-dropdown [--adaptive:none] [--strategy:static] sm:py-4 sm:[--strategy:fixed] sm:[--trigger:hover]'>
+                <button type='button' className='flex w-full items-center'>
                   <svg
                     className='me-2 mt-[2px] h-4 w-4 flex-shrink-0'
                     xmlns='http://www.w3.org/2000/svg'
@@ -99,7 +120,7 @@ export default function Navbar() {
                   </svg>
                 </button>
 
-                <div className='hs-dropdown-menu top-full z-10 hidden rounded-lg bg-white p-2 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-top-5 before:start-0 before:h-5 before:w-full hs-dropdown-open:opacity-100 dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-800 sm:w-48 sm:border sm:shadow-md sm:duration-[150ms] sm:dark:border'>
+                 <div className='hs-dropdown-menu top-full z-10 hidden rounded-lg bg-white p-2 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-top-5 before:start-0 before:h-5 before:w-full hs-dropdown-open:opacity-100 dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-800 sm:w-48 sm:border sm:shadow-md sm:duration-[150ms] sm:dark:border'>
                   <a
                     className='flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                     href='#'
@@ -164,7 +185,7 @@ export default function Navbar() {
                     Team Account
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </nav>

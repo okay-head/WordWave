@@ -9,3 +9,9 @@
   --accent-pink-800: hsl(349, 100%, 60%);
   --accent-pink-900: hsl(349, 80%, 60%);
 }
+
+@layer utilities {
+  .active {
+    @apply text-accent-pink-600;
+  }
+}
