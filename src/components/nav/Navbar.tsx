@@ -54,13 +54,13 @@ export default function Navbar() {
           >
             <div className='mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-7 sm:gap-y-0 sm:ps-7'>
               <a
-                className='py-1 font-medium hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
+                className='py-1 font-medium tracking-wide hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
                 href='#'
               >
                 Feed
               </a>
               <a
-                className='py-1 font-medium hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
+                className='py-1 font-medium tracking-wide hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6'
                 href='#'
               >
                 Users
@@ -69,7 +69,7 @@ export default function Navbar() {
               <div className='hs-dropdown [--adaptive:none] [--strategy:static] sm:py-4 sm:[--strategy:fixed] sm:[--trigger:hover]'>
                 <button
                   type='button'
-                  className='flex w-full items-center font-medium hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500 '
+                  className='flex w-full items-center font-medium tracking-wide hover:text-accent-pink-600 dark:text-gray-400 dark:hover:text-gray-500'
                 >
                   <svg
                     className='me-2 mt-[2px] h-4 w-4 flex-shrink-0'

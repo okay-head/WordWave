@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --accent-pink-500: hsl(349, 100%, 73%);
+  --accent-pink-500: hsl(349, 100%, 78%);
+  --accent-pink-600: hsl(349, 100%, 73%);
   --accent-pink-700: hsl(349, 100%, 65%);
+  --accent-pink-800: hsl(349, 100%, 60%);
+  --accent-pink-900: hsl(349, 80%, 60%);
 }

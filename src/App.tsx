@@ -28,9 +28,13 @@ export default function App() {
       <Navbar />
       <Toaster />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='auth/signin' element={<SignIn />} />
-        <Route path='auth/signup' element={<SignUp />} />
+        <Route path='/' />
+        <Route index element={<Home />} />
+        <Route path='/auth'>
+          <Route index element={<NotFound />} />
+          <Route path='signin' element={<SignIn />} />
+          <Route path='signup' element={<SignUp />} />
+        </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
