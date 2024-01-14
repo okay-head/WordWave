@@ -17,7 +17,7 @@ export default function UserCard() {
           {/* <button className='mb-3 ms-auto inline-flex items-center gap-x-1.5 rounded-full border border-gray-500 px-3 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400'>
             FOLLOW
           </button> */}
-          <button className='mb-1.5 ms-auto mt-1.5 inline-flex items-center gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-accent-pink-600 dark:bg-accent-pink-900'>
+          <button className='mb-1.5 ms-auto mt-1.5 inline-flex items-center gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-1.5 text-xs font-medium text-white transition-all hover:bg-accent-pink-600 dark:bg-accent-pink-900'>
             FOLLOW
           </button>
         </section>
