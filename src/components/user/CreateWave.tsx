@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Container from '../shared/Container'
 
 export default function CreateWave() {
-  const currentUser = 'Rick astley' //pull from context
+  const currentUser = 'Pickle Rick' //pull from context
   const [isError, setIsError] = useState(false)
   const [textArea, setTextArea] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -34,7 +34,7 @@ export default function CreateWave() {
           Create a Wave
         </h1>
 
-        <article className='wysiwyg-editor mt-6'>
+        <article className='wysiwyg-editor mt-4'>
           <div className='flex'>
             <label
               htmlFor='hs-validation-name-error'
@@ -52,7 +52,7 @@ export default function CreateWave() {
                 setTextArea(e.target.value)
               }}
               id='hs-validation-name-error'
-              className={`block min-h-32 w-full rounded-lg px-7 py-3 text-sm outline-0 focus:border-accent-pink-600  focus:shadow-sm focus:shadow-accent-pink-500  focus:ring-0 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600${
+              className={`block min-h-32 w-full rounded-lg px-6 py-4 text-sm outline-0 focus:border-accent-pink-600  focus:shadow-sm focus:shadow-accent-pink-500  focus:ring-0 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600${
                 isError
                   ? ' !border-red-500 focus:!border-red-500 focus:shadow-sm focus:!shadow-red-300'
                   : ''

@@ -4,8 +4,17 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import toast from 'react-hot-toast'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import useGlobalStore from '../state/GlobalState'
 
 export default function SignUp() {
+  const { auth, setAuth } = useGlobalStore()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (auth) navigate('/')
+  }, [auth])
+
   const formSchema = z.object({
     email: z
       .string()
@@ -56,6 +65,7 @@ export default function SignUp() {
 
     setTimeout(() => {
       toast.dismiss()
+      setAuth(true)
       console.log(values)
     }, 3000)
   }
@@ -83,14 +93,14 @@ export default function SignUp() {
                 </h1>
                 <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
                   Already have an account?{' '}
-                  <a
-                    className='font-medium text-accent-pink-600 
-                  decoration-2 hover:underline
+                  <Link
+                    to='/auth/signin'
+                    className='rounded-md p-1 py-2 font-medium text-accent-pink-600 decoration-2 
+                  hover:bg-gray-100
                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-pink-500 dark:text-accent-pink-900  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                    href='../examples/html/signin.html'
                   >
                     Sign in here
-                  </a>
+                  </Link>
                 </p>
               </div>
 
