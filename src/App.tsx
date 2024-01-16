@@ -11,6 +11,8 @@ import Home from './components/Home'
 import NotFound from './NotFound'
 import Users from './components/users/Users'
 import Profile from './components/profile/Profile'
+import CheckAuth from './components/auth/CheckAuth'
+import CreateWave from './components/user/CreateWave'
 
 declare global {
   interface Window {
@@ -40,9 +42,13 @@ export default function App() {
         <Route path='/users' element={<Users />} />
 
         {/* --- Protected routes (Only accessible when signed in) --- */}
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/:id' element={<CheckAuth />}>
+          <Route index element={<NotFound />} />
+          <Route path='profile' element={<Profile />} />
+          <Route path='create' element={<CreateWave />} />
+        </Route>
+        {/* --- Protected routes end--- */}
 
-        {/* --- Protected routes --- */}
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

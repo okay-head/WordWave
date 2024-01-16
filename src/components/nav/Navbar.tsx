@@ -158,7 +158,7 @@ l-27 10 36 40 c48 53 76 111 83 172 6 53 16 48 27 -14z m-113 -294 c64 -30
               )}
               {Anchor(
                 'profile',
-                '/profile',
+                '/:id/profile',
                 <div className='flex items-center'>
                   <svg
                     className='me-1 h-4 w-4 flex-shrink-0'

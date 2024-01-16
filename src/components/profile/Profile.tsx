@@ -1,10 +1,12 @@
+import Card from '../shared/Card'
 import Container from '../shared/Container'
+import UserCard from '../users/UserCard'
 // import TabBtn from './TabBtn'
 
 export default function Profile() {
   return (
-    <Container classVars='max-w-2xl'>
-      <article className='header-card card mt-8'>
+    <Container classVars='max-w-2xl mt-16'>
+      <article className='header-card card'>
         {/* <div className='flex flex-col sm:flex-row gap-10 rounded-xl border bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7] md:p-5'> */}
         <div className='flex flex-col gap-14 rounded-xl p-4 sm:flex-row md:p-5'>
           <span className='group-1 pfp -mt-4 block h-20 w-20 rounded-full bg-gray-200'></span>
@@ -41,7 +43,7 @@ export default function Profile() {
           </div>
 
           <button
-            className='inline-flex items-center gap-x-1.5 self-start rounded-full border border-accent-pink-600 px-4 py-3 text-xs font-medium text-accent-pink-600 transition-all hover:bg-accent-pink-600
+            className='inline-flex items-center gap-x-1.5 self-start rounded-full border border-accent-pink-600 px-4 py-2.5 text-xs font-medium text-accent-pink-600 transition-all hover:bg-accent-pink-600
             hover:text-white
             dark:border-gray-500 dark:text-gray-400 dark:hover:border-accent-pink-900 dark:hover:bg-transparent dark:hover:text-accent-pink-900 sm:ms-auto'
           >
@@ -100,7 +102,7 @@ export default function Profile() {
             aria-controls='bar-with-underline-2'
             role='tab'
           >
-            Tab 2
+            Followers
           </button>
           <button
             type='button'
@@ -110,7 +112,7 @@ export default function Profile() {
             aria-controls='bar-with-underline-3'
             role='tab'
           >
-            Tab 3
+            Following
           </button>
         </nav>
 
@@ -120,7 +122,11 @@ export default function Profile() {
             role='tabpanel'
             aria-labelledby='bar-with-underline-item-1'
           >
-            POST
+            <div className='cards-container panel-1-content'>
+              {[1, 2, 3, 4, 5, 6, 7].map((_, i) => {
+                return <Card key={i} />
+              })}
+            </div>
           </div>
           <div
             id='bar-with-underline-2'
@@ -128,7 +134,11 @@ export default function Profile() {
             role='tabpanel'
             aria-labelledby='bar-with-underline-item-2'
           >
-            FOLLOWERS
+            <div className='cards-container panel-2-content'>
+              {[1, 2].map((_, i) => {
+                return <UserCard key={i} />
+              })}
+            </div>
           </div>
           <div
             id='bar-with-underline-3'
@@ -136,7 +146,11 @@ export default function Profile() {
             role='tabpanel'
             aria-labelledby='bar-with-underline-item-3'
           >
-            FOLLOWING
+            <div className='cards-container panel-2-content'>
+              {[1, 2, 3, 4, 5].map((_, i) => {
+                return <UserCard key={i} />
+              })}
+            </div>
           </div>
         </div>
       </section>
