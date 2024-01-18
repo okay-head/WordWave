@@ -7,8 +7,8 @@ export default function CheckAuth() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!auth) navigate('/auth/signin')
-  }, [])
+    if (!auth) navigate('/')
+  }, [auth])
 
   return (
     <>
