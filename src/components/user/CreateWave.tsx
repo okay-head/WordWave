@@ -34,17 +34,18 @@ export default function CreateWave() {
           Create a Wave
         </h1>
 
-        <article className='wysiwyg-editor mt-4'>
-          <div className='flex'>
-            <label
-              htmlFor='hs-validation-name-error'
-              className={`mb-2 ms-auto block text-sm font-medium dark:text-white${
-                isError ? ' text-red-500' : ''
-              }`}
-            >
+        <article className='wysiwyg-editor mt-7'>
+          <label
+            htmlFor='hs-validation-name-error'
+            className={`mb-2 flex justify-between text-sm font-medium dark:text-white mx-3${
+              isError ? ' text-red-500' : ''
+            }`}
+          >
+            <span className='block'>Enter atleast 39 characters</span>
+            <span className='ms-auto block'>
               {243 - Number(textArea.trim().length)}
-            </label>
-          </div>
+            </span>
+          </label>
 
           <div className='relative'>
             <textarea
@@ -52,7 +53,7 @@ export default function CreateWave() {
                 setTextArea(e.target.value)
               }}
               id='hs-validation-name-error'
-              className={`block min-h-32 w-full rounded-lg px-6 py-4 text-sm outline-0 focus:border-accent-pink-600  focus:shadow-sm focus:shadow-accent-pink-500  focus:ring-0 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600${
+              className={`block min-h-32 w-full rounded-lg px-4 py-4 text-sm outline-0 focus:border-accent-pink-600  focus:shadow-sm focus:shadow-accent-pink-500  focus:ring-0 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600${
                 isError
                   ? ' !border-red-500 focus:!border-red-500 focus:shadow-sm focus:!shadow-red-300'
                   : ''
@@ -96,7 +97,11 @@ export default function CreateWave() {
         </article>
 
         <p
-          title={isError ? '' : 'Enter atleast 39 characters'}
+          title={
+            isError || Number(textArea.trim().length) < 39
+              ? 'Enter atleast 39 characters'
+              : ''
+          }
           className='submit-btn ms-2 mt-6'
         >
           <button

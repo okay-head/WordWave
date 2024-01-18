@@ -5,9 +5,8 @@ import UserCard from '../users/UserCard'
 
 export default function Profile() {
   return (
-    <Container classVars='max-w-2xl mt-16'>
+    <Container classVars='max-w-2xl mt-10'>
       <article className='header-card card'>
-        {/* <div className='flex flex-col sm:flex-row gap-10 rounded-xl border bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7] md:p-5'> */}
         <div className='flex flex-col gap-14 rounded-xl p-4 sm:flex-row md:p-5'>
           <span className='group-1 pfp -mt-4 block h-20 w-20 rounded-full bg-gray-200'></span>
           <div className='group-2 flex flex-col gap-4'>

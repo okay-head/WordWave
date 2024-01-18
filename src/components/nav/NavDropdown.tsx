@@ -30,7 +30,7 @@ export default function NavDropdown() {
         <button
           id='hs-dropdown-with-header'
           type='button'
-          className='me-1 inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full border border-transparent text-sm font-semibold text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-accent-pink-600 disabled:pointer-events-none disabled:opacity-50'
+          className='me-1 inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full border border-transparent text-sm font-semibold text-white hover:bg-white/20 hover:ring-2 hover:ring-accent-pink-500 focus:outline-none focus:ring-2 focus:ring-accent-pink-600 disabled:pointer-events-none disabled:opacity-50'
         >
           <img
             className='inline-block h-[2.375rem] w-[2.375rem] rounded-full'
