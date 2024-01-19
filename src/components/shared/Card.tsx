@@ -4,7 +4,11 @@ export default function Card() {
       <div className='flex flex-col rounded-xl border bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7] md:p-5'>
         <section className='card-header flex'>
           <div className='flex items-center gap-3'>
-            <span className='block h-10 w-10 rounded-full bg-gray-200'></span>
+            <img
+              className='ms-1 mt-[2px] inline-block h-9 w-9 self-start rounded-full'
+              src='/assets/user.webp'
+              alt='avatar'
+            />
             <div>
               <h3 className='text-lg font-semibold text-gray-800 dark:text-white'>
                 Author name
