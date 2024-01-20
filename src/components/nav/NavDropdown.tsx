@@ -25,7 +25,7 @@ export default function NavDropdown() {
   ))
 
   return (
-    <div className='NavDropdown flex flex-row items-center justify-end gap-2'>
+    <div className='NavDropdown flex flex-row items-center gap-2'>
       <div
         className='hs-dropdown relative inline-flex'
         data-hs-dropdown-placement='bottom-right'
@@ -33,10 +33,10 @@ export default function NavDropdown() {
         <button
           id='hs-dropdown-with-header'
           type='button'
-          className='inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full text-sm font-semibold text-white outline-none transition-all duration-100 hover:bg-white/20 hover:ring-2 hover:ring-accent-pink-500 focus:ring-2 focus:ring-accent-pink-600 disabled:pointer-events-none disabled:opacity-50'
+          className='inline-flex items-center justify-center gap-x-2 rounded-full text-sm font-semibold text-white outline-none transition-all duration-100 hover:bg-white/20 hover:ring-2 hover:ring-accent-pink-500 focus:ring-2 focus:ring-accent-pink-600 disabled:pointer-events-none disabled:opacity-50'
         >
           <img
-            className='inline-block h-[2.375rem] w-[2.375rem] rounded-full'
+            className='inline-block h-8 w-8 rounded-full sm:h-[2.375rem] sm:w-[2.375rem]'
             src='/assets/user.webp'
             alt='avatar'
           />

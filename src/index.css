@@ -19,3 +19,9 @@
     @apply relative min-w-0 flex-1 overflow-hidden border-s border-t-2 p-3 text-center text-sm font-medium text-gray-500 first:border-s-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 focus:text-accent-pink-600 focus:outline-none disabled:pointer-events-none disabled:opacity-50 hs-tab-active:border-t-accent-pink-600 hs-tab-active:text-gray-900 dark:border-l-gray-700 dark:border-t-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-400 dark:hs-tab-active:border-t-accent-pink-900 dark:hs-tab-active:text-white;
   }
 }
+.logo-svg {
+  transition: 0.5s ease-in fill;
+}
+.logo-svg:hover g:not(#SvgjsG1015) {
+  fill: var(--accent-pink-600);
+}

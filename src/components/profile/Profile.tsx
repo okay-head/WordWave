@@ -7,8 +7,12 @@ export default function Profile() {
   return (
     <Container classVars='max-w-2xl mt-10'>
       <article className='header-card card'>
-        <div className='flex flex-col gap-14 rounded-xl p-4 sm:flex-row md:p-5'>
-          <span className='group-1 pfp -mt-4 block h-20 w-20 rounded-full bg-gray-200'></span>
+        <div className='flex flex-col gap-12 rounded-xl p-4 sm:flex-row md:p-5'>
+          <img
+            className='group-1 pfp -mt-2 ms-4 h-20 w-20 self-start rounded-full'
+            src='/assets/user.webp'
+            alt='avatar'
+          />
           <div className='group-2 flex flex-col gap-4'>
             <section className='card-header flex'>
               <div className='flex items-center gap-3'>

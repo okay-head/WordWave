@@ -2,7 +2,7 @@ export default function Logo() {
   return (
     <svg
       viewBox='0 0 466 84.65608465608466'
-      className='z-10 h-[40px] w-[180px]'
+      className='logo-svg z-10 h-[40px] w-[180px]'
     >
       <defs id='SvgjsDefs1013'></defs>
       <g
