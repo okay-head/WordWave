@@ -80,7 +80,7 @@ export default function Navbar() {
           </div>
           <div
             id='navbar-collapse-with-animation'
-            className='hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 sm:block'
+            className='hs-collapse hidden grow basis-full transition-all duration-300 sm:block'
           >
             <div className='mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-6 sm:gap-y-0 sm:ps-7'>
               {navListItems}

@@ -113,6 +113,12 @@ export default function CreateWave() {
             Post
           </button>
         </p>
+
+        <img
+          src='/assets/typewriter.svg'
+          alt='[ Create article ]'
+          className='mx-auto mt-12 w-[60%] min-w-64 sm:mt-4'
+        />
       </Container>
     </div>
   )
