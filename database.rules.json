@@ -1,6 +1,22 @@
 {
   "rules": {
-    ".read": false,
-    ".write": false
+    "tweets": {
+      ".read": true,
+      "$tweet": {
+        ".write": "!newData.exists() && root.child('tweets').child($tweet).child('author_id').val() === auth.uid || !data.exists() && newData.child('author_id').val() === auth.uid"
+      }
+    },
+
+    "users": {
+      ".read": true,
+      "$user_id": {
+        "followers": { ".write": "auth!=null" },
+
+        "following": { ".write": "$user_id === auth.uid" },
+        "bio": { ".write": "$user_id === auth.uid" },
+        "tweets": { ".write": "$user_id === auth.uid" },
+        "username": { ".write": "$user_id === auth.uid" }
+      }
+    }
   }
 }
