@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import useGlobalStore from '../state/GlobalState'
+import { signUpFn } from '../../firebase/firebaseAuth'
 
 export default function SignUp() {
   const { auth, setAuth } = useGlobalStore()
@@ -53,21 +54,33 @@ export default function SignUp() {
 
   const passVal: string = watch('password')
   const onSubmit: SubmitHandler<TForm> = (values) => {
-    const toast1 = toast.success('Successfully created!')
-    const timeOut = new Promise((resolve) => {
-      setTimeout(() => {
-        toast.dismiss(toast1)
-        resolve('')
-      }, 800)
-    })
-    // only launch this after the above toast gets dismissed
-    timeOut.then(() => toast.loading('Redirecting'))
+    // --- Send to db ---
+    signUpFn(values.email, values.password)
+      .then((user) => {
+        console.log(user)
 
-    setTimeout(() => {
-      toast.dismiss()
-      setAuth(true)
-      console.log(values)
-    }, 3000)
+        // --- Notifications ---
+        const toast1 = toast.success('Successfully created!')
+        const timeOut = new Promise((resolve) => {
+          setTimeout(() => {
+            toast.dismiss(toast1)
+            resolve('')
+          }, 800)
+        })
+        // only launch this after the above toast gets dismissed
+        timeOut.then(() => toast.loading('Redirecting'))
+
+        // why are we waiting 1.5 seconds to dismiss it idk
+        setTimeout(() => {
+          toast.dismiss()
+          setAuth(true)
+          console.log(values)
+        }, 1500)
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.error('Signup failed! Check console to see messages')
+      })
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
   return (
