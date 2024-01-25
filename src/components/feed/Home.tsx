@@ -1,19 +1,27 @@
 import { Link } from 'react-router-dom'
-import Card from './shared/Card'
-import Container from './shared/Container'
-import useGlobalStore from './state/GlobalState'
+import Card from '../shared/Card'
+import Container from '../shared/Container'
+import useGlobalStore from '../state/GlobalState'
+import { getFn } from '../../firebase/firebaseDb'
+import { useEffect, useState } from 'react'
+import placeHolderData from './placeholderData'
 
 export default function Home() {
+  const [tweets, setTweets] = useState(placeHolderData)
   const { auth } = useGlobalStore()
+
+  useEffect(() => {
+    getFn('/tweets/')
+      .then((data) => setTweets(data))
+      .catch((err) => console.log(err))
+  }, [])
   return (
     <Container classVars='max-w-2xl'>
       <h1 className='-mt-8 border-b-2 pb-3 text-3xl font-semibold dark:border-gray-700 dark:text-white'>
         All waves
       </h1>
       <div className='cards-container'>
-        {[1, 2, 3, 4, 5, 6, 7].map((_, i) => {
-          return <Card key={i} />
-        })}
+        {tweets?.map((element, i) => <Card key={i} {...element} />)}
       </div>
 
       <Link
