@@ -77,9 +77,8 @@ export default function SignUp() {
           console.log(values)
         }, 1500)
       })
-      .catch((err) => {
-        console.log(err)
-        toast.error('Signup failed! \nCheck console to see messages')
+      .catch((message) => {
+        toast.error(<p className='text-center text-sm'>{message}</p>)
       })
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)

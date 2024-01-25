@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { useEffect } from 'react'
 import useGlobalStore from '../state/GlobalState'
 import { Link, useNavigate } from 'react-router-dom'
+import { signInFn } from '../../firebase/firebaseAuth'
 
 export default function SignIn() {
   const { auth, setAuth } = useGlobalStore()
@@ -42,24 +43,32 @@ export default function SignIn() {
     },
   })
 
-  const onSubmit: SubmitHandler<TForm> = (values) => {
-    const toast1 = toast.success('Logged in!')
-    const timeOut = new Promise((resolve) => {
-      setTimeout(() => {
-        toast.dismiss(toast1)
-        resolve('')
-      }, 800)
-    })
-    // only launch this after the above toast gets dismissed
-    timeOut.then(() => {
-      toast.loading('Redirecting')
-    })
+  const onSubmit: SubmitHandler<TForm> = ({ email, password }) => {
+    // --- Send to db ---
+    signInFn(email, password)
+      .then((user) => {
+        console.log(user)
 
-    setTimeout(() => {
-      toast.dismiss()
-      setAuth(true)
-      console.log(values)
-    }, 3000)
+        // --- Notifications ---
+        const toast1 = toast.success('Signed In!')
+        const timeOut = new Promise((resolve) => {
+          setTimeout(() => {
+            toast.dismiss(toast1)
+            resolve('')
+          }, 800)
+        })
+        // only launch this after the above toast gets dismissed
+        timeOut.then(() => toast.loading('Redirecting'))
+
+        // why are we waiting 1.5 seconds to dismiss it idk
+        setTimeout(() => {
+          toast.dismiss()
+          setAuth(true)
+        }, 1500)
+      })
+      .catch((message) => {
+        toast.error(<p className='text-center text-sm'>{message}</p>)
+      })
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
   return (

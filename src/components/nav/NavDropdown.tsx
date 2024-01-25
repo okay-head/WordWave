@@ -18,7 +18,7 @@ export default function NavDropdown() {
       const childNode: any = childRef.current
       childNode?.classList?.remove('!block')
       childNode?.classList?.remove('!opacity-100')
-    }, 100)
+    }, 300)
   }
   const listArray = [
     {
