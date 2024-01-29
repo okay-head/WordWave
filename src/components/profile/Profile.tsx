@@ -1,3 +1,4 @@
+import placeHolderData from '../feed/placeholderData'
 import Card from '../shared/Card'
 import Container from '../shared/Container'
 import UserCard from '../users/UserCard'
@@ -126,8 +127,8 @@ export default function Profile() {
             aria-labelledby='bar-with-underline-item-1'
           >
             <div className='cards-container panel-1-content'>
-              {[1, 2, 3, 4, 5, 6, 7].map((_, i) => {
-                return <Card key={i} />
+              {placeHolderData.map((x, i) => {
+                return <Card key={i} {...x} />
               })}
             </div>
           </div>
