@@ -1,7 +1,7 @@
 # User defined
 zheadless-ie-pure-csslibraries.txt
 database.rules.jsonc
-
+src/components/state/StatePractice.ts
 # Logs
 logs
 *.log
