@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from 'firebase/auth'
 
 const auth = getAuth(app)
@@ -34,5 +35,17 @@ export const signInFn = async (email: string, password: string) => {
     return Promise.reject(error.code)
   }
 }
+
+const unsub = onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // now we need a way to set context from here. we can't this is violating rule of hooks as this is not a functional component it sucks so we keep it in localstorage for now
+    const obj = JSON.stringify({ uid: user.uid, email: user.email || '' })
+    localStorage.setItem('firebaseAuthObj', obj)
+  } else {
+    localStorage.removeItem('firebaseAuthObj')
+    console.log('Logged OUT')
+  }
+})
+
 // const signUpGoogle
 // const signInGoogle

@@ -1,25 +1,19 @@
 import { create } from 'zustand'
+type Tuser = {
+  uid: string
+  email: string
+}
 type T = {
   auth: boolean
+  firebaseAuthObj: Tuser
   setAuth: (val: boolean) => void
+  setfirebaseAuthObj: (val: Tuser) => void
 }
 const useGlobalStore = create<T>()((set) => ({
-  auth: false,
+  auth: false, //is authenticated
+  firebaseAuthObj: { uid: 'null', email: 'null' }, //firebase auth object
   setAuth: (val) => set(() => ({ auth: val })),
+  setfirebaseAuthObj: (val) => set(() => ({ firebaseAuthObj: val })),
 }))
 
 export default useGlobalStore
-
-/* -- Zustand syntax -- */
-/* 
-  - pull create from zustand
-
-  - Make a store
-  useStore = create(set=>(obj))
-  obj = {
-    count: 0,
-    setCount: ()=>(set(Function))
-  }
-
-  Function = (state)=>({count: state.count + 1})  //first arg will always be the currentStateValue
-*/

@@ -5,16 +5,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
 import useGlobalStore from '../state/GlobalState'
 import { signUpFn } from '../../firebase/firebaseAuth'
 
 export default function SignUp() {
-  const { auth, setAuth } = useGlobalStore()
+  const { setAuth } = useGlobalStore()
   const navigate = useNavigate()
-  useEffect(() => {
-    if (auth) navigate('/')
-  }, [auth])
 
   const formSchema = z.object({
     email: z
@@ -54,30 +50,17 @@ export default function SignUp() {
 
   const passVal: string = watch('password')
   const onSubmit: SubmitHandler<TForm> = (values) => {
+    // --- Notifications ---
+    const toast1 = toast.success('Creating your account')
     // --- Send to db ---
     signUpFn(values.email, values.password)
       .then((user) => {
-        console.log(user)
-
-        // --- Notifications ---
-        const toast1 = toast.success('Successfully created!')
-        const timeOut = new Promise((resolve) => {
-          setTimeout(() => {
-            toast.dismiss(toast1)
-            resolve('')
-          }, 800)
-        })
-        // only launch this after the above toast gets dismissed
-        timeOut.then(() => toast.loading('Redirecting'))
-
-        // why are we waiting 1.5 seconds to dismiss it idk
-        setTimeout(() => {
-          toast.dismiss()
-          setAuth(true)
-          console.log(values)
-        }, 1500)
+        const uid = user.user.uid
+        setAuth(true)
+        navigate(`/${uid}/createProfile`)
       })
       .catch((message) => {
+        toast.dismiss()
         toast.error(<p className='text-center text-sm'>{message}</p>)
       })
   }
