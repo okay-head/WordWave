@@ -57,7 +57,7 @@ export default function CreateProfile() {
     // how do i get access to the auth object
     // i can save the current auth var in zustand, by binding it to onAuthStateChanged
 
-    const payload: userPayload = {
+    const payload: TuserPayload = {
       user_id: uid,
       user_name: name,
       user_handle: handle,

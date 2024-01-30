@@ -2,15 +2,6 @@ import { format } from 'fecha'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-type T = {
-  id: string
-  avatar: null
-  author_name: string
-  author_handle: string
-  author_id: string
-  date: number
-  body: string
-}
 /* 
   A word on loading states
 
@@ -29,7 +20,7 @@ export default function Card({
   author_handle,
   date,
   body,
-}: T) {
+}: Ttweet) {
   const formatDate = (date: Date) => format(date, 'Do MMMM, YYYY')
 
   const bodyData =

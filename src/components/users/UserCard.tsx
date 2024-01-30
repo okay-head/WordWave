@@ -1,6 +1,14 @@
 import useGlobalStore from './../state/GlobalState'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-export default function UserCard() {
+export default function UserCard({
+  user_name,
+  user_handle,
+  user_bio,
+  user_followers,
+  user_following,
+}: TuserPayload) {
   const { auth } = useGlobalStore()
   return (
     <article className='card mt-8'>
@@ -14,20 +22,35 @@ export default function UserCard() {
             />
             <div>
               <h3 className='text-lg font-semibold text-gray-800 dark:text-white'>
-                Author name
+                {user_name == 'null' ? (
+                  <Skeleton
+                    baseColor='#d8d9d9'
+                    highlightColor='#e5e6e6'
+                    height={'1.125rem'}
+                    width={'8rem'}
+                  />
+                ) : (
+                  user_name
+                )}
               </h3>
               <p className='-mt-[2px] text-xs font-medium text-accent-pink-500 dark:text-accent-pink-900'>
-                @username
+                {user_handle == 'null' ? (
+                  <Skeleton
+                    baseColor='#d8d9d9'
+                    highlightColor='#e5e6e6'
+                    height={'0.75rem'}
+                    width={'5rem'}
+                  />
+                ) : (
+                  user_handle
+                )}
               </p>
             </div>
           </div>
-          {/* <button className='mb-3 ms-auto inline-flex items-center gap-x-1.5 rounded-full border border-gray-500 px-3 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400'>
-            FOLLOW
-          </button> */}
           <div className='group relative ms-auto'>
             <button
               disabled={!auth}
-              className='mb-1.5 inline-flex items-center gap-2 gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-2 text-xs font-medium text-white transition-all hover:bg-accent-pink-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-accent-pink-900 sm:mt-1.5'
+              className='inline-flex items-center gap-2 gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-2 text-xs font-medium text-white transition-all hover:bg-accent-pink-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-accent-pink-900 sm:mt-1.5'
             >
               <span>
                 <img src='/assets/icons8-plus-48.png' alt='' className='w-4' />
@@ -35,7 +58,7 @@ export default function UserCard() {
               <span>FOLLOW</span>
             </button>
             {!auth && (
-              <p className='absolute left-[53%] top-full w-20 -translate-x-1/2 -translate-y-[2px] select-none text-[10px] text-[--text-base] opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100'>
+              <p className='absolute left-[53%] top-0 w-20 -translate-x-1/2 translate-y-0 select-none text-[10px] text-[--text-base] opacity-0 transition-all group-hover:-translate-y-[10px] group-hover:opacity-100'>
                 Sign in to follow
               </p>
             )}
@@ -43,16 +66,49 @@ export default function UserCard() {
         </section>
 
         <div className='ms-14 mt-2 text-gray-500 dark:text-gray-400'>
-          <p> Crypto. Investing. Market manipulation.</p>
-          <p> All opinions are mine</p>
+          {user_bio === 'null' ? (
+            <Skeleton
+              baseColor='#d8d9d9'
+              highlightColor='#e5e6e6'
+              height={'1rem'}
+              width={'100%'}
+              count={2}
+            />
+          ) : (
+            user_bio
+          )}
         </div>
 
         <div className='chips ms-14 mt-7 flex gap-3 text-sm text-gray-500 dark:text-gray-400'>
           <span className='border-r pr-3'>
-            <b className='font-semibold'>450</b> Followers{' '}
+            {user_followers[0] == 'null' ? (
+              <Skeleton
+                baseColor='#d8d9d9'
+                highlightColor='#e5e6e6'
+                height={'1.2rem'}
+                width={'5.5rem'}
+              />
+            ) : (
+              <p>
+                <b className='font-semibold'>{user_followers?.length}</b>{' '}
+                Followers
+              </p>
+            )}
           </span>
           <span>
-            <b className='font-semibold'>750</b> Following{' '}
+            {user_followers[0] == 'null' ? (
+              <Skeleton
+                baseColor='#d8d9d9'
+                highlightColor='#e5e6e6'
+                height={'1.2rem'}
+                width={'5.5rem'}
+              />
+            ) : (
+              <p>
+                <b className='font-semibold'>{user_following?.length}</b>{' '}
+                Following
+              </p>
+            )}
           </span>
         </div>
       </div>

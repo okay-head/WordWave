@@ -1,0 +1,48 @@
+const placeHolderDataUser = [
+  {
+    user_id: 'null',
+    user_name: 'null',
+    user_handle: 'null',
+    user_bio: 'null',
+    user_tweets: ['null'],
+    user_followers: ['null'],
+    user_following: ['null'],
+  },
+  {
+    user_id: 'null',
+    user_name: 'null',
+    user_handle: 'null',
+    user_bio: 'null',
+    user_tweets: ['null'],
+    user_followers: ['null'],
+    user_following: ['null'],
+  },
+  {
+    user_id: 'null',
+    user_name: 'null',
+    user_handle: 'null',
+    user_bio: 'null',
+    user_tweets: ['null'],
+    user_followers: ['null'],
+    user_following: ['null'],
+  },
+  {
+    user_id: 'null',
+    user_name: 'null',
+    user_handle: 'null',
+    user_bio: 'null',
+    user_tweets: ['null'],
+    user_followers: ['null'],
+    user_following: ['null'],
+  },
+  {
+    user_id: 'null',
+    user_name: 'null',
+    user_handle: 'null',
+    user_bio: 'null',
+    user_tweets: ['null'],
+    user_followers: ['null'],
+    user_following: ['null'],
+  },
+]
+export default placeHolderDataUser
