@@ -5,12 +5,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import useGlobalStore from '../state/GlobalState'
+import { setFn } from '../../firebase/firebaseDb'
 
 export default function CreateProfile() {
   const placeHolderText = 'King of vegetables 👑.\nPortable. Durable. Tasty.'
   const navigate = useNavigate()
+  const { uid } = useGlobalStore((state) => state.firebaseAuthObj)
 
   const formSchema = z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1, 'Please enter a user name')
+      .max(20, 'User name must be within 20 characters'),
     handle: z
       .string()
       .trim()
@@ -34,12 +42,13 @@ export default function CreateProfile() {
   } = useForm<TForm>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: '',
       handle: '',
       bio: '',
     },
   })
 
-  const onSubmit: SubmitHandler<TForm> = ({ handle, bio }) => {
+  const onSubmit: SubmitHandler<TForm> = ({ name, handle, bio }) => {
     // console values
 
     // package a payload consisting of userauthinfo and these vals
@@ -48,17 +57,33 @@ export default function CreateProfile() {
     // how do i get access to the auth object
     // i can save the current auth var in zustand, by binding it to onAuthStateChanged
 
-    const payload = {
-      user_id: 'user1706190430465',
+    const payload: userPayload = {
+      user_id: uid,
+      user_name: name,
       user_handle: handle,
-      user_avatar: null,
       user_bio: bio,
-      user_tweets: [],
-      user_followers: [[]],
-      user_following: [[]],
+      user_tweets: ['null'],
+      user_followers: ['null'],
+      user_following: ['null'],
     }
 
+    console.log({ payload, postUrl: `db/users/${uid}` })
+
     // --- Send to db ---
+    setFn(`users/${uid}`, payload)
+      .then(() => {
+        toast.success('Successfully created!')
+        setTimeout(() => {
+          toast.dismiss()
+          navigate(`/`)
+        }, 1500)
+      })
+      .catch((message) => {
+        toast.dismiss()
+        toast.error('DB Error')
+        console.error(message)
+      })
+
     // signUpFn(values.email, values.password)
     //   .then((user) => {
     //     console.log(user)
@@ -85,7 +110,7 @@ export default function CreateProfile() {
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
   return (
-    <Container classVars='mt-28'>
+    <Container>
       <div className='createProfilePage grid-cols-2 gap-4 md:grid'>
         <article className='hero-img-createProfile order-1 hidden place-items-center pt-8 md:grid'>
           <img
@@ -112,6 +137,30 @@ export default function CreateProfile() {
                 <form onSubmit={handleSubmit(onSubmit, onError)}>
                   <div className='grid gap-y-4'>
                     {/* <!-- Form Group --> */}
+                    <div>
+                      <label
+                        htmlFor='name'
+                        className='mb-2 block text-sm dark:text-white'
+                      >
+                        Set your display name
+                      </label>
+                      <div className='relative'>
+                        <input
+                          {...register('name')}
+                          type='text'
+                          id='name'
+                          name='name'
+                          placeholder='Mr. Potato'
+                          className='block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-accent-pink-500 focus:ring-accent-pink-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600'
+                          aria-describedby='name-error'
+                        />
+                        {errors?.name && <ErrorSvg />}
+                      </div>
+
+                      <p className='mt-2 text-xs text-red-600' id='name-error'>
+                        {errors?.name?.message}
+                      </p>
+                    </div>
                     <div>
                       <label
                         htmlFor='handle'
