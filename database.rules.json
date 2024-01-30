@@ -11,11 +11,7 @@
       ".read": true,
       "$user_id": {
         "followers": { ".write": "auth!=null" },
-
-        "following": { ".write": "$user_id === auth.uid" },
-        "bio": { ".write": "$user_id === auth.uid" },
-        "tweets": { ".write": "$user_id === auth.uid" },
-        "username": { ".write": "$user_id === auth.uid" }
+        ".write": "$user_id === auth.uid"
       }
     }
   }
