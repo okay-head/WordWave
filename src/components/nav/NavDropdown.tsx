@@ -3,7 +3,10 @@ import useGlobalStore from '../state/GlobalState'
 import NavDropdownListItem from './NavDropdownListItem'
 
 export default function NavDropdown() {
-  const { auth } = useGlobalStore()
+  const {
+    auth,
+    firebaseAuthObj: { uid },
+  } = useGlobalStore()
   const childRef = useRef(null)
 
   const handleClick = () => {
@@ -24,10 +27,10 @@ export default function NavDropdown() {
     {
       text: 'Profile',
       icon: '/icons8-customer-32.png',
-      linkTo: '/:id/profile',
+      linkTo: `/${uid}/profile`,
     },
-    { text: 'Write', icon: '/icons8-create-32.png', linkTo: '/:id/create' },
-    { text: 'Logout', icon: '/icons8-logout-32.png', linkTo: '/:id/logout' },
+    { text: 'Write', icon: '/icons8-create-32.png', linkTo: `/${uid}/create` },
+    { text: 'Logout', icon: '/icons8-logout-32.png', linkTo: `/${uid}/logout` },
   ] as const
 
   const listArray2 = [
