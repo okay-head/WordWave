@@ -90,13 +90,15 @@ export default function UserCard({
               />
             ) : (
               <p>
-                <b className='font-semibold'>{user_followers?.length}</b>{' '}
+                <b className='font-semibold'>
+                  {user_followers[0] == '0' ? 0 : user_followers?.length}
+                </b>{' '}
                 Followers
               </p>
             )}
           </span>
           <span>
-            {user_followers[0] == 'null' ? (
+            {user_following[0] == 'null' ? (
               <Skeleton
                 baseColor='#d8d9d9'
                 highlightColor='#e5e6e6'
@@ -105,7 +107,9 @@ export default function UserCard({
               />
             ) : (
               <p>
-                <b className='font-semibold'>{user_following?.length}</b>{' '}
+                <b className='font-semibold'>
+                  {user_following[0] == '0' ? 0 : user_following?.length}
+                </b>{' '}
                 Following
               </p>
             )}

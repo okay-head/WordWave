@@ -62,9 +62,9 @@ export default function CreateProfile() {
       user_name: name,
       user_handle: handle,
       user_bio: bio,
-      user_tweets: ['null'],
-      user_followers: ['null'],
-      user_following: ['null'],
+      user_tweets: ['0'],
+      user_followers: ['0'],
+      user_following: ['0'],
     }
 
     console.log({ payload, postUrl: `db/users/${uid}` })

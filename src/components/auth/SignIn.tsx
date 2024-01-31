@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import useGlobalStore from '../state/GlobalState'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInFn } from '../../firebase/firebaseAuth'
+import genErrMsg from './genErrMsg'
 
 export default function SignIn() {
   const { auth, setAuth } = useGlobalStore()
@@ -15,6 +16,7 @@ export default function SignIn() {
   useEffect(() => {
     if (auth) navigate('/')
   }, [auth])
+
   const formSchema = z.object({
     email: z
       .string()
@@ -67,7 +69,7 @@ export default function SignIn() {
         }, 1500)
       })
       .catch((message) => {
-        toast.error(<p className='text-center text-sm'>{message}</p>)
+        toast.error(<p className='text-center text-sm'>{genErrMsg(message)}</p>)
       })
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)

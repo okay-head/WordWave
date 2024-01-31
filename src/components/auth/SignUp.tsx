@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
 import useGlobalStore from '../state/GlobalState'
 import { signUpFn } from '../../firebase/firebaseAuth'
+import genErrMsg from './genErrMsg'
 
 export default function SignUp() {
   const { setAuth } = useGlobalStore()
@@ -59,9 +60,9 @@ export default function SignUp() {
         setAuth(true)
         navigate(`/${uid}/createProfile`)
       })
-      .catch((message) => {
-        toast.dismiss()
-        toast.error(<p className='text-center text-sm'>{message}</p>)
+      .catch((message: string) => {
+        toast.dismiss(toast1)
+        toast.error(<p className='text-center text-sm'>{genErrMsg(message)}</p>)
       })
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
