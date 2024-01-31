@@ -1,15 +1,26 @@
+import { useEffect, useState } from 'react'
 import useGlobalStore from './../state/GlobalState'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function UserCard({
+  user_id,
   user_name,
   user_handle,
   user_bio,
   user_followers,
   user_following,
 }: TuserPayload) {
-  const { auth } = useGlobalStore()
+  const [isFollowing, setIsFollowing] = useState(false)
+  const auth = useGlobalStore((state) => state.auth)
+  const { uid } = useGlobalStore((state) => state.firebaseAuthObj)
+  useEffect(() => {
+    // set the cards as isFollowing true first thing the component loads
+  }, [])
+  const handleClick = () => {
+    // send to db
+    setIsFollowing(true)
+  }
   return (
     <article className='card mt-8'>
       <div className='flex flex-col rounded-xl border bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7] md:p-5'>
@@ -47,22 +58,47 @@ export default function UserCard({
               </p>
             </div>
           </div>
-          <div className='group relative ms-auto'>
-            <button
-              disabled={!auth}
-              className='inline-flex items-center gap-2 gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-2 text-xs font-medium text-white transition-all hover:bg-accent-pink-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-accent-pink-900 sm:mt-1.5'
-            >
-              <span>
-                <img src='/assets/icons8-plus-48.png' alt='' className='w-4' />
-              </span>
-              <span>FOLLOW</span>
-            </button>
-            {!auth && (
-              <p className='absolute left-[53%] top-0 w-20 -translate-x-1/2 translate-y-0 select-none text-[10px] text-[--text-base] opacity-0 transition-all group-hover:-translate-y-[10px] group-hover:opacity-100'>
-                Sign in to follow
-              </p>
-            )}
-          </div>
+          {isFollowing ? (
+            <div className='group relative ms-auto'>
+              <button
+                disabled
+                //  disabled={auth && user_id == uid}
+                onClick={handleClick}
+                className='inline-flex items-center gap-2 gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-2 text-xs font-medium text-white transition-all hover:bg-accent-pink-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-accent-pink-900 sm:mt-1.5'
+              >
+                <span>
+                  <img
+                    src='/assets/icons8-tick-48.png'
+                    alt=''
+                    className='w-4'
+                  />
+                </span>
+                <span>FOLLOWING</span>
+              </button>
+            </div>
+          ) : (
+            <div className='group relative ms-auto'>
+              <button
+                disabled={auth && user_id == uid}
+                onClick={handleClick}
+                className='inline-flex items-center gap-2 gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-2 text-xs font-medium text-white transition-all hover:bg-accent-pink-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-accent-pink-900 sm:mt-1.5'
+              >
+                <span>
+                  <img
+                    src='/assets/icons8-plus-48.png'
+                    alt=''
+                    className='w-4'
+                  />
+                </span>
+                <span>FOLLOW</span>
+              </button>
+              {!auth && (
+                <p className='absolute left-[53%] top-0 w-20 -translate-x-1/2 translate-y-0 select-none text-[10px] text-[--text-base] opacity-0 transition-all group-hover:-translate-y-[10px] group-hover:opacity-100'>
+                  Sign in to follow
+                </p>
+              )}
+            </div>
+          )}
         </section>
 
         <div className='ms-14 mt-2 text-gray-500 dark:text-gray-400'>
