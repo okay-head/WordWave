@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom'
 import useGlobalStore from '../state/GlobalState'
 import { setFn } from '../../firebase/firebaseDb'
 
-export default function CreateProfile() {
+export default function CreateProfile(postPayload: TTuser) {
   const placeHolderText = 'King of vegetables 👑.\nPortable. Durable. Tasty.'
   const navigate = useNavigate()
-  const { uid } = useGlobalStore((state) => state.firebaseAuthObj)
+  const setAuth = useGlobalStore((state) => state.setAuth)
+  const setUser = useGlobalStore((state) => state.setUser)
 
   const formSchema = z.object({
     name: z
@@ -49,16 +50,8 @@ export default function CreateProfile() {
   })
 
   const onSubmit: SubmitHandler<TForm> = ({ name, handle, bio }) => {
-    // console values
-
-    // package a payload consisting of userauthinfo and these vals
-
-    // Now i dont need to store id, password in db but i do need to make a req to db/auth.uid
-    // how do i get access to the auth object
-    // i can save the current auth var in zustand, by binding it to onAuthStateChanged
-
     const payload: TuserPayload = {
-      user_id: uid,
+      user_id: postPayload.uid,
       user_name: name,
       user_handle: handle,
       user_bio: bio,
@@ -67,14 +60,15 @@ export default function CreateProfile() {
       user_following: ['0'],
     }
 
-    console.log({ payload, postUrl: `db/users/${uid}` })
-
     // --- Send to db ---
-    setFn(`users/${uid}`, payload)
+    setFn(`users/${postPayload.uid}`, payload)
       .then(() => {
         toast.success('Successfully created!')
+        //update the user details in context after creation
+        setUser({ ...payload, uid: postPayload.uid, email: postPayload.email })
         setTimeout(() => {
           toast.dismiss()
+          setAuth(true)
           navigate(`/`)
         }, 1500)
       })
@@ -83,32 +77,9 @@ export default function CreateProfile() {
         toast.error('DB Error')
         console.error(message)
       })
-
-    // signUpFn(values.email, values.password)
-    //   .then((user) => {
-    //     console.log(user)
-    //     // --- Notifications ---
-    //     const toast1 = toast.success('Successfully created!')
-    //     const timeOut = new Promise((resolve) => {
-    //       setTimeout(() => {
-    //         toast.dismiss(toast1)
-    //         resolve('')
-    //       }, 800)
-    //     })
-    //     // only launch this after the above toast gets dismissed
-    //     timeOut.then(() => toast.loading('Redirecting'))
-    //     // why are we waiting 1.5 seconds to dismiss it idk
-    //     setTimeout(() => {
-    //       toast.dismiss()
-    //       setAuth(true)
-    //       console.log(values)
-    //     }, 1500)
-    //   })
-    //   .catch((message) => {
-    //     toast.error(<p className='text-center text-sm'>{message}</p>)
-    // })
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
+
   return (
     <Container>
       <div className='createProfilePage grid-cols-2 gap-4 md:grid'>

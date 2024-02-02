@@ -4,15 +4,27 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import toast from 'react-hot-toast'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import useGlobalStore from '../state/GlobalState'
 import { signUpFn } from '../../firebase/firebaseAuth'
 import genErrMsg from './genErrMsg'
+import { useEffect, useState } from 'react'
+import CreateProfile from '../user/CreateProfile'
 
 export default function SignUp() {
-  const { setAuth } = useGlobalStore()
-  const navigate = useNavigate()
+  // pull from context
+  const userObj = useGlobalStore((state) => state.user)
 
+  const [userPayload, setUserPayload] = useState<TTuser>(userObj)
+  // this is to persist the payload state b/w say, when a user signs up, but refreshes during createprofile screen
+  useEffect(() => {
+    const local = localStorage.getItem('userPayload')
+    if (local != null) setUserPayload(JSON.parse(local))
+  }, [])
+
+  // check this doc as to if the entries are passed down to the createProfile component correctly
+  // then check if the component renders correctly
+  // then check if we need to store userObj in state
   const formSchema = z.object({
     email: z
       .string()
@@ -48,17 +60,21 @@ export default function SignUp() {
       'confirm-password': '',
     },
   })
-
   const passVal: string = watch('password')
+
   const onSubmit: SubmitHandler<TForm> = (values) => {
-    // --- Notifications ---
     const toast1 = toast.success('Creating your account')
+
     // --- Send to db ---
     signUpFn(values.email, values.password)
       .then((user) => {
-        const uid = user.user.uid
-        setAuth(true)
-        navigate(`/${uid}/createProfile`)
+        const obj = {
+          ...userObj,
+          uid: user.user.uid,
+          email: user.user.email || 'null',
+        }
+        setUserPayload(obj)
+        localStorage.setItem('userPayload', JSON.stringify(obj))
       })
       .catch((message: string) => {
         toast.dismiss(toast1)
@@ -66,7 +82,9 @@ export default function SignUp() {
       })
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
-  return (
+  return userPayload.uid != 'null' ? (
+    <CreateProfile {...userPayload} />
+  ) : (
     <Container classVars=''>
       <div className='signupPage grid-cols-2 gap-4 md:grid'>
         <article className='hero-img-signup order-1 hidden place-items-center pt-8 md:grid'>

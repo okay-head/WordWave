@@ -13,7 +13,7 @@ export default function UserCard({
 }: TuserPayload) {
   const [isFollowing, setIsFollowing] = useState(false)
   const auth = useGlobalStore((state) => state.auth)
-  const { uid } = useGlobalStore((state) => state.firebaseAuthObj)
+  const { uid } = useGlobalStore((state) => state.user)
   useEffect(() => {
     // set the cards as isFollowing true first thing the component loads
   }, [])
