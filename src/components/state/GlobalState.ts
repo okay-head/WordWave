@@ -1,22 +1,23 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-type Tuser = {
-  uid: string
-  email: string
-}
+import placeHolderDataUser from '../user/placeHolderData'
+
 type T = {
   auth: boolean
-  firebaseAuthObj: Tuser
+  user: TTuser
   setAuth: (val: boolean) => void
-  setfirebaseAuthObj: (val: Tuser) => void
+  setUser: (val: TTuser) => void
 }
+const userDefaultVal = { uid: 'null', email: 'null', ...placeHolderDataUser[0] }
+
+// Actual store creation in zustand
 const useGlobalStore = create<T>()(
   persist(
     (set) => ({
       auth: false, //is authenticated
-      firebaseAuthObj: { uid: 'null', email: 'null' }, //firebase auth object
+      user: userDefaultVal, //sets the current user object
       setAuth: (val) => set(() => ({ auth: val })),
-      setfirebaseAuthObj: (val) => set(() => ({ firebaseAuthObj: val })),
+      setUser: (val) => set(() => ({ user: val })),
     }),
     {
       name: 'global-store',

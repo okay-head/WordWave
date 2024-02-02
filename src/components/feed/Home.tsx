@@ -10,7 +10,7 @@ export default function Home() {
   const [tweets, setTweets] = useState(placeHolderData)
   const {
     auth,
-    firebaseAuthObj: { uid },
+    user: { uid },
   } = useGlobalStore()
 
   useEffect(() => {

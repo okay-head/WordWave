@@ -5,7 +5,7 @@ import NavDropdownListItem from './NavDropdownListItem'
 export default function NavDropdown() {
   const {
     auth,
-    firebaseAuthObj: { uid },
+    user: { uid },
   } = useGlobalStore()
   const childRef = useRef(null)
 
