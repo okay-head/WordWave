@@ -7,6 +7,11 @@ type TuserPayload = {
   user_followers: string[]
   user_following: string[]
 }
+type Tuser = {
+  uid: string
+  email: string
+}
+type TTuser = Tuser & TuserPayload
 
 type Ttweet = {
   id: string
