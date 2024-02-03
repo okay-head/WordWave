@@ -5,6 +5,7 @@ import {
   getDatabase,
   connectDatabaseEmulator,
   set,
+  update,
 } from 'firebase/database'
 import { app } from './firebaseApp'
 
@@ -24,6 +25,16 @@ export const setUserFn = async (url: string, payload: Tuser) => {
 
   try {
     const res = set(ref(db, url), payload)
+    return res
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+type PTuser = Partial<Tuser>
+export const updateData = async (url: string, payload: any) => {
+  // ⚠ No checks
+  try {
+    const res = update(ref(db, url), payload)
     return res
   } catch (error) {
     return Promise.reject(error)

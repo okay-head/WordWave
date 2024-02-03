@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import useGlobalStore from './../state/GlobalState'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { updateData } from '../../firebase/firebaseDb'
+import toast from 'react-hot-toast'
 
 export default function UserCard({
   user_id,
@@ -16,6 +18,9 @@ export default function UserCard({
   const auth = useGlobalStore((state) => state.auth)
   const { user_id: currentUser_id, user_following: currentUser_following } =
     useGlobalStore((state) => state.user)
+  // ⚠ importing twice
+  const userObjContext = useGlobalStore((state) => state.user)
+  const setUserObjContext = useGlobalStore((state) => state.setUser)
 
   useEffect(() => {
     // set the cards as isFollowing true first thing the component loads
@@ -29,8 +34,26 @@ export default function UserCard({
   // IMPORTANT: Dont forget to re-render the components when the new data takes over the mock data
 
   const handleClick = () => {
+    // first temporarily disable click
+    setIsFollowing(true)
+
     // send to db
-    // setIsFollowing(true)
+    updateData(`users/${currentUser_id}/user_following`, {
+      ...[...currentUser_following, user_id],
+    })
+      .then(() => {
+        //update context
+        const newUser = {
+          ...userObjContext,
+          user_following: [...currentUser_following, user_id],
+        }
+        setUserObjContext(newUser)
+      })
+      .catch((err) => {
+        setIsFollowing(false)
+        toast.error('Operation failed! Try again later')
+        console.log(err)
+      })
   }
   return (
     <article className='card mt-8'>
