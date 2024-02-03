@@ -10,13 +10,22 @@ export default function UserCard({
   user_bio,
   user_followers,
   user_following,
-}: TuserPayload) {
+}: Tuser) {
   const [isFollowing, setIsFollowing] = useState(false)
   const auth = useGlobalStore((state) => state.auth)
-  const { uid } = useGlobalStore((state) => state.user)
+  const { uid, user_following: currentUser_following } = useGlobalStore(
+    (state) => state.user,
+  )
   useEffect(() => {
+    const exists =
+      currentUser_following.find((x) => x === user_id) == undefined
+        ? false
+        : true
+    // if(exists)
+    console.log(exists)
+
     // set the cards as isFollowing true first thing the component loads
-  }, [])
+  }, [currentUser_following])
   const handleClick = () => {
     // send to db
     setIsFollowing(true)

@@ -17,7 +17,7 @@ export const getFn = async (url: string = '') => {
   return data.val()
 }
 
-export const setFn = async (url: string, payload: TuserPayload) => {
+export const setUserFn = async (url: string, payload: Tuser) => {
   const res = await get(ref(db, url))
   if (res.exists())
     return Promise.reject('Data already exists at this location\ndb/' + url)

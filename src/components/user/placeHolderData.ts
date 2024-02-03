@@ -1,6 +1,7 @@
 const placeHolderDataUser = [
   {
     user_id: 'null',
+    user_email: 'null',
     user_name: 'null',
     user_handle: 'null',
     user_bio: 'null',
@@ -10,6 +11,7 @@ const placeHolderDataUser = [
   },
   {
     user_id: 'null',
+    user_email: 'null',
     user_name: 'null',
     user_handle: 'null',
     user_bio: 'null',
@@ -19,6 +21,7 @@ const placeHolderDataUser = [
   },
   {
     user_id: 'null',
+    user_email: 'null',
     user_name: 'null',
     user_handle: 'null',
     user_bio: 'null',
@@ -28,6 +31,7 @@ const placeHolderDataUser = [
   },
   {
     user_id: 'null',
+    user_email: 'null',
     user_name: 'null',
     user_handle: 'null',
     user_bio: 'null',
@@ -37,6 +41,7 @@ const placeHolderDataUser = [
   },
   {
     user_id: 'null',
+    user_email: 'null',
     user_name: 'null',
     user_handle: 'null',
     user_bio: 'null',

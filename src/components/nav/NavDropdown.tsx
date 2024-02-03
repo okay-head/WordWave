@@ -5,7 +5,7 @@ import NavDropdownListItem from './NavDropdownListItem'
 export default function NavDropdown() {
   const {
     auth,
-    user: { uid },
+    user: { user_id, user_bio },
   } = useGlobalStore()
   const childRef = useRef(null)
 
@@ -27,10 +27,18 @@ export default function NavDropdown() {
     {
       text: 'Profile',
       icon: '/icons8-customer-32.png',
-      linkTo: `/${uid}/profile`,
+      linkTo: `/${user_id}/profile`,
     },
-    { text: 'Write', icon: '/icons8-create-32.png', linkTo: `/${uid}/create` },
-    { text: 'Logout', icon: '/icons8-logout-32.png', linkTo: `/${uid}/logout` },
+    {
+      text: 'Write',
+      icon: '/icons8-create-32.png',
+      linkTo: `/${user_id}/create`,
+    },
+    {
+      text: 'Logout',
+      icon: '/icons8-logout-32.png',
+      linkTo: `/${user_id}/logout`,
+    },
   ] as const
 
   const listArray2 = [
@@ -79,7 +87,7 @@ export default function NavDropdown() {
                 Signed in as
               </p>
               <p className='text-sm font-medium text-gray-800 dark:text-gray-300'>
-                @itspicklerick
+                {user_bio}
               </p>
             </div>
             <div className='mt-2 py-2 first:pt-0 last:pb-0'>{listItems}</div>

@@ -1,5 +1,6 @@
-type TuserPayload = {
+type Tuser = {
   user_id: string
+  user_email: string
   user_name: string
   user_handle: string
   user_bio: string
@@ -7,11 +8,6 @@ type TuserPayload = {
   user_followers: string[]
   user_following: string[]
 }
-type Tuser = {
-  uid: string
-  email: string
-}
-type TTuser = Tuser & TuserPayload
 
 type Ttweet = {
   id: string

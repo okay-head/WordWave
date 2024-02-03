@@ -4,11 +4,11 @@ import placeHolderDataUser from '../user/placeHolderData'
 
 type T = {
   auth: boolean
-  user: TTuser
+  user: Tuser
   setAuth: (val: boolean) => void
-  setUser: (val: TTuser) => void
+  setUser: (val: Tuser) => void
 }
-const userDefaultVal = { uid: 'null', email: 'null', ...placeHolderDataUser[0] }
+const userDefaultVal = { ...placeHolderDataUser[0] }
 
 // Actual store creation in zustand
 const useGlobalStore = create<T>()(
