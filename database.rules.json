@@ -10,7 +10,7 @@
     "users": {
       ".read": true,
       "$user_id": {
-        "followers": { ".write": "auth!=null" },
+        "user_followers": { ".write": "auth!=null" },
         ".write": "$user_id === auth.uid"
       }
     }

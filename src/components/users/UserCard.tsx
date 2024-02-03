@@ -1,3 +1,4 @@
+/* HERE's how you create self contained components that also house render states */
 import { useEffect, useState } from 'react'
 import useGlobalStore from './../state/GlobalState'
 import Skeleton from 'react-loading-skeleton'
@@ -13,22 +14,23 @@ export default function UserCard({
 }: Tuser) {
   const [isFollowing, setIsFollowing] = useState(false)
   const auth = useGlobalStore((state) => state.auth)
-  const { uid, user_following: currentUser_following } = useGlobalStore(
-    (state) => state.user,
-  )
+  const { user_id: currentUser_id, user_following: currentUser_following } =
+    useGlobalStore((state) => state.user)
+
   useEffect(() => {
+    // set the cards as isFollowing true first thing the component loads
+    // re-render when new data comes in or during follow/unfollow
     const exists =
       currentUser_following.find((x) => x === user_id) == undefined
         ? false
         : true
-    // if(exists)
-    console.log(exists)
+    if (auth && exists) setIsFollowing(true)
+  }, [currentUser_following, user_id])
+  // IMPORTANT: Dont forget to re-render the components when the new data takes over the mock data
 
-    // set the cards as isFollowing true first thing the component loads
-  }, [currentUser_following])
   const handleClick = () => {
     // send to db
-    setIsFollowing(true)
+    // setIsFollowing(true)
   }
   return (
     <article className='card mt-8'>
@@ -88,7 +90,7 @@ export default function UserCard({
           ) : (
             <div className='group relative ms-auto'>
               <button
-                disabled={auth && user_id == uid}
+                disabled={auth && user_id == currentUser_id}
                 onClick={handleClick}
                 className='inline-flex items-center gap-2 gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-2 text-xs font-medium text-white transition-all hover:bg-accent-pink-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-accent-pink-900 sm:mt-1.5'
               >
