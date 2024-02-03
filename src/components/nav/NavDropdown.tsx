@@ -5,7 +5,7 @@ import NavDropdownListItem from './NavDropdownListItem'
 export default function NavDropdown() {
   const {
     auth,
-    user: { user_id, user_bio },
+    user: { user_id, user_handle },
   } = useGlobalStore()
   const childRef = useRef(null)
 
@@ -87,7 +87,7 @@ export default function NavDropdown() {
                 Signed in as
               </p>
               <p className='text-sm font-medium text-gray-800 dark:text-gray-300'>
-                {user_bio}
+                {user_handle}
               </p>
             </div>
             <div className='mt-2 py-2 first:pt-0 last:pb-0'>{listItems}</div>

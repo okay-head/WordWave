@@ -4,13 +4,11 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
 import useGlobalStore from '../state/GlobalState'
-import { setFn } from '../../firebase/firebaseDb'
+import { setUserFn } from '../../firebase/firebaseDb'
 
-export default function CreateProfile(postPayload: TTuser) {
+export default function CreateProfile({ user_id, user_email }: Tuser) {
   const placeHolderText = 'King of vegetables 👑.\nPortable. Durable. Tasty.'
-  const navigate = useNavigate()
   const setAuth = useGlobalStore((state) => state.setAuth)
   const setUser = useGlobalStore((state) => state.setUser)
 
@@ -50,8 +48,9 @@ export default function CreateProfile(postPayload: TTuser) {
   })
 
   const onSubmit: SubmitHandler<TForm> = ({ name, handle, bio }) => {
-    const payload: TuserPayload = {
-      user_id: postPayload.uid,
+    const payload: Tuser = {
+      user_id,
+      user_email,
       user_name: name,
       user_handle: handle,
       user_bio: bio,
@@ -61,15 +60,18 @@ export default function CreateProfile(postPayload: TTuser) {
     }
 
     // --- Send to db ---
-    setFn(`users/${postPayload.uid}`, payload)
+    setUserFn(`users/${user_id}`, payload)
       .then(() => {
-        toast.success('Successfully created!')
+        toast.success('Profile successfully created!')
+
         //update the user details in context after creation
-        setUser({ ...payload, uid: postPayload.uid, email: postPayload.email })
+        setUser(payload)
+
+        // redirect after a timeout [NEED ANIMATION]
         setTimeout(() => {
           toast.dismiss()
+          localStorage.removeItem('userPayload')
           setAuth(true)
-          navigate(`/`)
         }, 1500)
       })
       .catch((message) => {

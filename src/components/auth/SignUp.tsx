@@ -4,7 +4,7 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useGlobalStore from '../state/GlobalState'
 import { signUpFn } from '../../firebase/firebaseAuth'
 import genErrMsg from './genErrMsg'
@@ -12,19 +12,19 @@ import { useEffect, useState } from 'react'
 import CreateProfile from '../user/CreateProfile'
 
 export default function SignUp() {
-  // pull from context
+  // pull user from context, we don't SET the userObj to context here
   const userObj = useGlobalStore((state) => state.user)
-
-  const [userPayload, setUserPayload] = useState<TTuser>(userObj)
+  const auth = useGlobalStore((state) => state.auth)
+  const [userPayload, setUserPayload] = useState<Tuser>(userObj)
+  const navigate = useNavigate()
   // this is to persist the payload state b/w say, when a user signs up, but refreshes during createprofile screen
+  // this localStorage is used up by createProfile component
   useEffect(() => {
+    if (auth) navigate('/')
     const local = localStorage.getItem('userPayload')
     if (local != null) setUserPayload(JSON.parse(local))
-  }, [])
+  }, [auth])
 
-  // check this doc as to if the entries are passed down to the createProfile component correctly
-  // then check if the component renders correctly
-  // then check if we need to store userObj in state
   const formSchema = z.object({
     email: z
       .string()
@@ -70,9 +70,10 @@ export default function SignUp() {
       .then((user) => {
         const obj = {
           ...userObj,
-          uid: user.user.uid,
-          email: user.user.email || 'null',
+          user_id: user.user.uid,
+          user_email: user.user.email || 'null',
         }
+        // we pass down this new user payload to createProfile
         setUserPayload(obj)
         localStorage.setItem('userPayload', JSON.stringify(obj))
       })
@@ -82,7 +83,9 @@ export default function SignUp() {
       })
   }
   const onError: SubmitErrorHandler<TForm> = (err) => console.warn(err)
-  return userPayload.uid != 'null' ? (
+
+  // [IMPROVEMENT] Put this inside a slider in future
+  return userPayload.user_id != 'null' ? (
     <CreateProfile {...userPayload} />
   ) : (
     <Container classVars=''>

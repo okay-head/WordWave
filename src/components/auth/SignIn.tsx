@@ -9,9 +9,12 @@ import useGlobalStore from '../state/GlobalState'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInFn } from '../../firebase/firebaseAuth'
 import genErrMsg from './genErrMsg'
+import { getFn } from '../../firebase/firebaseDb'
 
 export default function SignIn() {
-  const { auth, setAuth } = useGlobalStore()
+  const auth = useGlobalStore((state) => state.auth)
+  const setAuth = useGlobalStore((state) => state.setAuth)
+  const setUser = useGlobalStore((state) => state.setUser)
   const navigate = useNavigate()
   useEffect(() => {
     if (auth) navigate('/')
@@ -49,24 +52,21 @@ export default function SignIn() {
     // --- Send to db ---
     signInFn(email, password)
       .then((user) => {
-        console.log(user)
+        const toast1 = toast.success('Signed In! Redirecting...')
 
-        // --- Notifications ---
-        const toast1 = toast.success('Signed In!')
-        const timeOut = new Promise((resolve) => {
+        // get user from db
+        getFn(`users/${user.user.uid}`).then((userObj) => {
+          console.log(userObj)
+
+          // set user in context
+          setUser(userObj)
+
+          // redirect after a timeout [NEED ANIMATION]
           setTimeout(() => {
             toast.dismiss(toast1)
-            resolve('')
-          }, 800)
+            setAuth(true)
+          }, 1000)
         })
-        // only launch this after the above toast gets dismissed
-        timeOut.then(() => toast.loading('Redirecting'))
-
-        // why are we waiting 1.5 seconds to dismiss it idk
-        setTimeout(() => {
-          toast.dismiss()
-          setAuth(true)
-        }, 1500)
       })
       .catch((message) => {
         toast.error(<p className='text-center text-sm'>{genErrMsg(message)}</p>)
