@@ -34,19 +34,26 @@ export default function UserCard({
   // IMPORTANT: Dont forget to re-render the components when the new data takes over the mock data
 
   const handleClick = () => {
+    if (!auth) return
     // first temporarily disable click
     setIsFollowing(true)
 
     // send to db
-    updateData(`users/${currentUser_id}/user_following`, {
-      ...[...currentUser_following, user_id],
-    })
+    const updatePayload =
+      currentUser_following[0] == '0'
+        ? { ...[user_id] }
+        : {
+            ...[...currentUser_following, user_id],
+          }
+
+    updateData(`users/${currentUser_id}/user_following`, updatePayload)
       .then(() => {
         //update context
         const newUser = {
           ...userObjContext,
-          user_following: [...currentUser_following, user_id],
+          user_following: Object.values(updatePayload) as string[],
         }
+
         setUserObjContext(newUser)
       })
       .catch((err) => {
