@@ -22,9 +22,6 @@ export default function Card({
   body,
 }: Ttweet) {
   const formatDate = (date: Date) => format(date, 'Do MMMM, YYYY')
-
-  const bodyData =
-    'Sadly excepting Iure defungo copiose amita armarium aureus debitis titulus. Ultio cras thesaurus suspendo contabesco. Esse carpo velut vos cervus vesica sol denego abscido.'
   return (
     <article className='card mt-8' id={id}>
       <div className='flex flex-col rounded-xl border bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7] md:p-5'>
@@ -57,7 +54,7 @@ export default function Card({
                     width={'5rem'}
                   />
                 ) : (
-                  `@${author_handle}`
+                  author_handle
                 )}
               </p>
             </div>
@@ -86,7 +83,7 @@ export default function Card({
               count={3}
             />
           ) : (
-            bodyData
+            body
           )}
         </p>
       </div>

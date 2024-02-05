@@ -1,17 +1,76 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Container from '../shared/Container'
+import useGlobalStore from '../state/GlobalState'
+import { getKey, setFn, updateData } from '../../firebase/firebaseDb'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 export default function CreateWave() {
-  const currentUser = 'Pickle Rick' //pull from context
+  // IMPROVEMENT: Performance
+  // console.log('render')
+
   const [isError, setIsError] = useState(false)
   const [textArea, setTextArea] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
-  function onSubmitHandler() {
-    console.log(textArea)
-    console.log('send to db')
-    // toast notif
+  const userObjContext = useGlobalStore((state) => state.user)
+  const setUserObjContext = useGlobalStore((state) => state.setUser)
+
+  const navigate = useNavigate()
+  // push id needs to persist between renders, such that only one tweet makes it to the db
+  const tweetIdRef = useRef<string | undefined | null>(null)
+
+  const onSubmitHandler = async () => {
     setSubmitted(true)
+
+    // Calls
+    // 1) call to /tweets endpoint for new tweet creation
+    // 2) call to /users/user_id/user_tweets utilizing the tweet id
+    // 3) update context
+
+    tweetIdRef.current = getKey('tweets')
+    if (!tweetIdRef.current) return
+
+    const updatePayload =
+      userObjContext.user_tweets[0] == '0'
+        ? { ...[tweetIdRef.current] }
+        : {
+            ...[...userObjContext.user_tweets, tweetIdRef.current],
+          }
+    const tweetPayload = {
+      id: tweetIdRef.current,
+      author_name: userObjContext.user_name,
+      author_handle: userObjContext.user_handle,
+      author_id: userObjContext.user_id,
+      date: Date.now(),
+      body: textArea,
+    }
+
+    // update user object and tweet
+    // either both fail or succeed
+    Promise.all([
+      setFn(`tweets/${tweetIdRef.current}`, tweetPayload),
+      updateData(`users/${userObjContext.user_id}/user_tweets`, updatePayload),
+    ])
+      .then(() => {
+        toast.success('New wave created!')
+        //update context
+        const newUser = {
+          ...userObjContext,
+          user_tweets: Object.values(updatePayload) as string[],
+        }
+        setUserObjContext(newUser)
+        setTimeout(() => {
+          navigate('/')
+          toast.dismiss()
+        }, 900)
+      })
+      .catch((err) => {
+        setSubmitted(false)
+        toast.dismiss()
+        toast.error('Operation failed! Try again later')
+        console.log(err)
+      })
   }
 
   function errorFn() {
@@ -59,7 +118,7 @@ export default function CreateWave() {
                   : ''
               }`}
               rows={3}
-              placeholder={`Whats popping ${currentUser} ...?`}
+              placeholder={`Whats popping ${userObjContext.user_name} ...?`}
               aria-describedby='hs-validation-name-error-helper'
               value={textArea}
               required

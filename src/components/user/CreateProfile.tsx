@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import toast from 'react-hot-toast'
 import useGlobalStore from '../state/GlobalState'
-import { setUserFn } from '../../firebase/firebaseDb'
+import { setFn } from '../../firebase/firebaseDb'
 
 export default function CreateProfile({ user_id, user_email }: Tuser) {
   const placeHolderText = 'King of vegetables 👑.\nPortable. Durable. Tasty.'
@@ -60,7 +60,7 @@ export default function CreateProfile({ user_id, user_email }: Tuser) {
     }
 
     // --- Send to db ---
-    setUserFn(`users/${user_id}`, payload)
+    setFn(`users/${user_id}`, payload)
       .then(() => {
         toast.success('Profile successfully created!')
 

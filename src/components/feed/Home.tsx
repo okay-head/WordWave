@@ -15,7 +15,9 @@ export default function Home() {
 
   useEffect(() => {
     getFn('/tweets/')
-      .then((data) => setTweets(data))
+      .then((data) => {
+        setTweets(Object.values(data))
+      })
       .catch((err) => console.error(err))
   }, [])
   return (
