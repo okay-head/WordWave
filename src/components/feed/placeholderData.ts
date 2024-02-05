@@ -1,7 +1,6 @@
 const placeHolderData = [
   {
     id: 'tweet0',
-    avatar: null,
     author_name: 'null',
     author_handle: 'null',
     author_id: 'null',
@@ -10,7 +9,6 @@ const placeHolderData = [
   },
   {
     id: 'tweet1',
-    avatar: null,
     author_name: 'null',
     author_handle: 'null',
     author_id: 'null',
@@ -19,7 +17,6 @@ const placeHolderData = [
   },
   {
     id: 'tweet2',
-    avatar: null,
     author_name: 'null',
     author_handle: 'null',
     author_id: 'null',
@@ -28,7 +25,6 @@ const placeHolderData = [
   },
   {
     id: 'tweet3',
-    avatar: null,
     author_name: 'null',
     author_handle: 'null',
     author_id: 'null',
@@ -37,7 +33,6 @@ const placeHolderData = [
   },
   {
     id: 'tweet4',
-    avatar: null,
     author_name: 'null',
     author_handle: 'null',
     author_id: 'null',
@@ -46,7 +41,6 @@ const placeHolderData = [
   },
   {
     id: 'tweet5',
-    avatar: null,
     author_name: 'null',
     author_handle: 'null',
     author_id: 'null',
@@ -55,7 +49,6 @@ const placeHolderData = [
   },
   {
     id: 'tweet6',
-    avatar: null,
     author_name: 'null',
     author_handle: 'null',
     author_id: 'null',
@@ -64,7 +57,6 @@ const placeHolderData = [
   },
   {
     id: 'tweet7',
-    avatar: null,
     author_name: 'null',
     author_handle: 'null',
     author_id: 'null',
