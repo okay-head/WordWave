@@ -100,7 +100,7 @@ export default function Profile() {
           </div>
 
           <button
-            className='inline-flex items-center gap-x-1.5 self-start rounded-full border border-accent-pink-600 px-4 py-2.5 text-xs font-medium text-accent-pink-600 transition-all hover:bg-accent-pink-600
+            className='inline-flex select-none items-center gap-x-1.5 self-start rounded-full border border-accent-pink-600 px-4 py-2.5 text-xs font-medium text-accent-pink-600 transition-all hover:bg-accent-pink-600
             hover:text-white
             dark:border-gray-500 dark:text-gray-400 dark:hover:border-accent-pink-900 dark:hover:bg-transparent dark:hover:text-accent-pink-900 sm:ms-auto'
           >
