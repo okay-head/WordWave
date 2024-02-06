@@ -123,6 +123,12 @@ export default function SignUp() {
 
               <div className='mt-5'>
                 <button
+                  onClick={() => {
+                    toast.loading('N/A. Coming soon')
+                    setTimeout(() => {
+                      toast.dismiss()
+                    }, 1200)
+                  }}
                   type='button'
                   className='inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium 
                 text-gray-800 shadow-sm focus-within:ring-accent-pink-500
