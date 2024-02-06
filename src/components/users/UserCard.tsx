@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import useGlobalStore from './../state/GlobalState'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { updateData } from '../../firebase/firebaseDb'
+import { getFn, updateData } from '../../firebase/firebaseDb'
 import toast from 'react-hot-toast'
 
 export default function UserCard({
@@ -16,10 +16,9 @@ export default function UserCard({
 }: Tuser) {
   const [isFollowing, setIsFollowing] = useState(false)
   const auth = useGlobalStore((state) => state.auth)
-  const { user_id: currentUser_id, user_following: currentUser_following } =
-    useGlobalStore((state) => state.user)
-  // ⚠ importing twice
   const userObjContext = useGlobalStore((state) => state.user)
+  const { user_id: currentUser_id, user_following: currentUser_following } =
+    userObjContext
   const setUserObjContext = useGlobalStore((state) => state.setUser)
 
   useEffect(() => {
@@ -31,27 +30,41 @@ export default function UserCard({
         : true
     if (auth && exists) setIsFollowing(true)
   }, [currentUser_following, user_id])
-  // IMPORTANT: Dont forget to re-render the components when the new data takes over the mock data
+  // IMPORTANT: Dont forget to re-render the component when the new data takes over the mock data
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!auth) return
-    // first temporarily disable click
+    // first disable click
     setIsFollowing(true)
 
-    // send to db
-    const updatePayload =
+    // 1. Update current user following
+    // 2. Update target user follower count
+    const updatePayload1 =
       currentUser_following[0] == '0'
         ? { ...[user_id] }
         : {
             ...[...currentUser_following, user_id],
           }
+    // get the target user credentials
+    const targetUser: Tuser = await getFn(`/users/${user_id}`)
+    const updatePayload2 =
+      targetUser.user_followers[0] == '0'
+        ? { ...[currentUser_id] }
+        : {
+            ...[...targetUser.user_followers, currentUser_id],
+          }
 
-    updateData(`users/${currentUser_id}/user_following`, updatePayload)
+    //Promise.all for atomic updates
+    Promise.all([
+      updateData(`users/${currentUser_id}/user_following`, updatePayload1),
+      updateData(`users/${user_id}/user_followers`, updatePayload2),
+    ])
+
       .then(() => {
         //update context
         const newUser = {
           ...userObjContext,
-          user_following: Object.values(updatePayload) as string[],
+          user_following: Object.values(updatePayload1) as string[],
         }
 
         setUserObjContext(newUser)

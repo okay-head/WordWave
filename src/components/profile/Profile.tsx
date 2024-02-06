@@ -6,7 +6,6 @@ import placeHolderDataUser from '../user/placeHolderData'
 import UserCard from '../users/UserCard'
 import useGlobalStore from '../state/GlobalState'
 import { getFn } from '../../firebase/firebaseDb'
-// import TabBtn from './TabBtn'
 
 export default function Profile() {
   const [followers, setFollowers] = useState(placeHolderDataUser)
@@ -14,20 +13,29 @@ export default function Profile() {
   const [posts, setPosts] = useState(placeHolderData)
 
   const userObjContext = useGlobalStore((state) => state.user)
+
   useEffect(() => {
     /* 1. POSTS */
     // make a get call to all tweets
     const tweets = userObjContext.user_tweets
     if (tweets[0] == '0') setPosts([])
+    else {
+      Promise.all(tweets.map((x) => getFn(`tweets/${x}`)))
+        .then((res) => setPosts(res))
+        .catch((err) => console.log(err))
+    }
 
     /* 2. FOLLOWERS */
     const followers = userObjContext.user_followers
     if (followers[0] == '0') setFollowers([])
+    else {
+      Promise.all(followers.map((x) => getFn(`users/${x}`)))
+        .then((res) => setFollowers(res))
+        .catch((err) => console.log(err))
+    }
 
     /* 3. FOLLOWING */
     const following = userObjContext.user_following
-    console.log(following)
-
     if (following[0] == '0') setFollowing([])
     else {
       // Promise.all(following.map((x) => getFn(`users/${x}`)))

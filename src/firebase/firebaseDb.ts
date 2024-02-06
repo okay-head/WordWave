@@ -71,3 +71,14 @@ export const getKey = (url: string): string | undefined | null => {
     return undefined
   }
 }
+
+/* 
+That is how you update atomically, sadly I can't seem to make it work with ts
+Need to read about typing objects TS
+
+const updates = {};
+  updates[`posts/${key}/stars/${uid}`] = true;
+  updates[`posts/${key}/starCount`] = increment(1);
+  updates[`user-posts/${key}/stars/${uid}`] = true;
+  updates[`user-posts/${key}/starCount`] = increment(1);
+  update(dbRef, updates); */
