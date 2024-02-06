@@ -52,18 +52,16 @@ export default function SignIn() {
     // --- Send to db ---
     signInFn(email, password)
       .then((user) => {
-        const toast1 = toast.success('Signed In! Redirecting...')
+        toast.success('Signed In!')
 
         // get user from db
         getFn(`users/${user.user.uid}`).then((userObj) => {
-          console.log(userObj)
-
           // set user in context
           setUser(userObj)
 
           // redirect after a timeout [NEED ANIMATION]
           setTimeout(() => {
-            toast.dismiss(toast1)
+            toast.dismiss()
             setAuth(true)
           }, 1000)
         })

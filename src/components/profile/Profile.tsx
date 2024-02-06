@@ -60,7 +60,7 @@ export default function Profile() {
                   <h3 className='w-full text-3xl font-semibold text-gray-800 dark:text-white'>
                     {userObjContext.user_name}
                   </h3>
-                  <p className='-mt-[2px] text-sm font-medium text-accent-pink-500 dark:text-accent-pink-900'>
+                  <p className='font-medium text-accent-pink-500 dark:text-accent-pink-900'>
                     {userObjContext.user_handle}
                   </p>
                 </div>
@@ -104,7 +104,7 @@ export default function Profile() {
             hover:text-white
             dark:border-gray-500 dark:text-gray-400 dark:hover:border-accent-pink-900 dark:hover:bg-transparent dark:hover:text-accent-pink-900 sm:ms-auto'
           >
-            Edit Profile
+            Edit&nbsp;Profile
           </button>
         </div>
       </article>
