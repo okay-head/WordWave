@@ -10,7 +10,7 @@ export default function Home() {
   const [tweets, setTweets] = useState(placeHolderData)
   const [data, setData] = useState(placeHolderData)
 
-  const [option, setOption] = useState<'Following' | 'All'>('Following')
+  const [option, setOption] = useState<'Following' | 'All'>('All')
   const {
     auth,
     user: { user_id, user_following },
@@ -29,7 +29,8 @@ export default function Home() {
     getFn('/tweets/')
       .then((res) => {
         setData(Object.values(res))
-        tweetSetter(Object.values(res))
+        setTweets(Object.values(res))
+        // tweetSetter(Object.values(res))
       })
       .catch((err) => console.error(err))
   }, [])
@@ -94,7 +95,6 @@ export default function Home() {
               type='radio'
               className='shrink-0 rounded-full border-gray-200 text-accent-pink-600 focus:ring-0 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:checked:border-accent-pink-500 dark:checked:bg-accent-pink-500 dark:focus:ring-offset-gray-800'
               aria-describedby='hs-dropdown-item-radio-delete-description'
-              defaultChecked
             />
           </div>
           <label htmlFor='hs-dropdown-item-radio-delete' className='ms-3.5'>
@@ -120,6 +120,7 @@ export default function Home() {
               type='radio'
               className='shrink-0 rounded-full border-gray-200 text-accent-pink-600 focus:ring-0 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:checked:border-accent-pink-500 dark:checked:bg-accent-pink-500 dark:focus:ring-offset-gray-800'
               aria-describedby='hs-dropdown-item-radio-archive-description'
+              defaultChecked
             />
           </div>
           <label htmlFor='hs-dropdown-item-radio-archive' className='ms-3.5'>
@@ -147,7 +148,20 @@ export default function Home() {
         {auth ? filterDropDown : ''}
       </div>
       <div className='cards-container'>
-        {tweets?.map((element, i) => <Card key={i} {...element} />)}
+        {auth && tweets.length == 0 ? (
+          <div className='mt-16 flex flex-col gap-12'>
+            <img
+              src='/assets/empty-feed.svg'
+              alt='Empty feed'
+              className='mx-auto w-3/4'
+            />
+            <h2 className='text-center text-lg italic'>
+              This section is empty. Follow users and ask them to post
+            </h2>{' '}
+          </div>
+        ) : (
+          tweets?.map((element, i) => <Card key={i} {...element} />)
+        )}
       </div>
       <Link
         to={auth ? `/${user_id}/create` : '/auth/signin'}

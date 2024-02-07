@@ -46,34 +46,41 @@ export default function UserCard({
             ...[...currentUser_following, user_id],
           }
     // get the target user credentials
-    const targetUser: Tuser = await getFn(`/users/${user_id}`)
-    const updatePayload2 =
-      targetUser.user_followers[0] == '0'
-        ? { ...[currentUser_id] }
-        : {
-            ...[...targetUser.user_followers, currentUser_id],
+    try {
+      const targetUser: Tuser = await getFn(`/users/${user_id}`)
+
+      const updatePayload2 =
+        targetUser.user_followers[0] == '0'
+          ? { ...[currentUser_id] }
+          : {
+              ...[...targetUser.user_followers, currentUser_id],
+            }
+
+      //Promise.all for atomic updates
+      Promise.all([
+        updateData(`users/${currentUser_id}/user_following`, updatePayload1),
+        updateData(`users/${user_id}/user_followers`, updatePayload2),
+      ])
+
+        .then(() => {
+          //update context
+          const newUser = {
+            ...userObjContext,
+            user_following: Object.values(updatePayload1) as string[],
           }
 
-    //Promise.all for atomic updates
-    Promise.all([
-      updateData(`users/${currentUser_id}/user_following`, updatePayload1),
-      updateData(`users/${user_id}/user_followers`, updatePayload2),
-    ])
-
-      .then(() => {
-        //update context
-        const newUser = {
-          ...userObjContext,
-          user_following: Object.values(updatePayload1) as string[],
-        }
-
-        setUserObjContext(newUser)
-      })
-      .catch((err) => {
-        setIsFollowing(false)
-        toast.error('Operation failed! Try again later')
-        console.log(err)
-      })
+          setUserObjContext(newUser)
+        })
+        .catch((err) => {
+          setIsFollowing(false)
+          toast.error('Operation failed! Try again later')
+          console.log(err)
+        })
+    } catch (error) {
+      setIsFollowing(false)
+      toast.error('Cannot fetch user')
+      console.log(error)
+    }
   }
   return (
     <article className='card mt-8'>
