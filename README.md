@@ -12,7 +12,7 @@
 
 ## [Demo](blog-site-ecru-phi.vercel.app/)
 
-<!-- ![Site snapshot](./public/assets/Blog-site-snapshot.webp) -->
+![Site snapshot](./public/assets/site-snapshot.png)
 
 ## Usage
 
@@ -96,6 +96,7 @@ pnpm/npm dev
 ## Continued development
 
 - Introduction of more user actions
+- Create wave: make it WYSIWYG
 - Enforcing tests
 - Dark theme support
 
@@ -117,4 +118,5 @@ This project is [MIT](/LICENSE) licensed.
 
 ## Acknowledgements
 
-Quick scaffolding readme by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)
+- Icons by [Icons8](https://icons8.com/)
+- Icons by [Flaticon](https://www.flaticon.com/)
