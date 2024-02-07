@@ -10,9 +10,11 @@
 
 <p align="center">The highly original 'Twitter clone'. This was supposed to be a take home assignment but here we are.</p>
 
-## [Demo](blog-site-ecru-phi.vercel.app/)
+## [Demo](https://word-wave-deployment.vercel.app/)
 
 ![Site snapshot](./public/assets/site-snapshot.png)
+
+<p align="center">Eyebleach</p>
 
 ## Usage
 
