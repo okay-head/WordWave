@@ -14,7 +14,7 @@
 
 ![Site snapshot](./public/assets/site-snapshot.png)
 
-<p align="center">Eyebleach</p>
+<p align="center"><sup>Eyebleach</sup></p>
 
 ## Usage
 
@@ -29,8 +29,8 @@
 Create a new user account or use the following dummy credentials
 
 ```
-username: cheems@doge.com
-password: cheemsthedoge
+username: becky@email.com
+password: beckyemail
 ```
 
 Once signed in
