@@ -39,9 +39,10 @@ Once signed in
 - View your profile information
   - See the users you follow
   - See the users that follow you
-  - See all the waves you've created
+  - See all waves that you've created
 - Edit your profile
 - Logout
+- Star this repo
 
 ## Tech stack
 
@@ -50,8 +51,8 @@ Once signed in
 - **[Typescript](https://www.typescriptlang.org/)** - type safety at the cost of headache
 - **[preline](https://preline.co/)** - taiwlind component library that likes to be a lil extra
 - **[React hook form](https://react-hook-form.com/)** - form states, performance, errors
-- **[Zod](https://zod.dev/)** - bearbones state management solution
-- **[Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)** - schema resolver, form validator
+- **[Zod](https://zod.dev/)** - schema resolver, form validator
+- **[Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)** - bearbones state management solution
 - **[Firebase](https://firebase.google.com/)** - Backend for the site
 
 #### Utilities
@@ -62,8 +63,8 @@ Once signed in
 - **[Fakerjs](https://www.youtube.com/watch?v=R6S-b_k-ZKY&pp=ygUWVGhlIEludGVybmV0J3MgT3duIEJveQ%3D%3D)** - mock data generation
 - **[Fecha](https://www.npmjs.com/package/fecha)** - Effortless date parsing
 - **[Prettier](https://prettier.io/)** - opinionated formatting with a minimal .prettierrc config
-- **[Vite](https://vitejs.dev/guide/why.html)** - blazingly fast module bundler, using vite with swc
-- **[pnpm](https://pnpm.io/)** - low disk space? say no more
+- **[Vite(SWC)](https://vitejs.dev/guide/why.html)** - blazingly fast module bundler
+- **[pnpm](https://pnpm.io/)** - performant npm. No false audit warnings
 
 ## Install
 
@@ -79,24 +80,22 @@ vite: v5.0.8
 
 ```sh
 pnpm install
-```
-
-&nbsp;&nbsp;&nbsp;&nbsp;or
-
-```sh
+   #or
 npm install
 ```
 
 2. Spin up the development server
 
 ```sh
-pnpm/npm dev
+pnpm dev
+  #or
+npm dev
 ```
 
 ## Continued development
 
 - Introduction of more user actions
-- Create wave: make it WYSIWYG
+- Create wave: turn it into a WYSIWYG editor
 - Enforcing tests
 - Dark theme support
 
@@ -118,5 +117,6 @@ This project is [MIT](/LICENSE) licensed.
 
 ## Acknowledgements
 
+- Pretty SVG illustrations by [Katerina Limpitsouni](https://undraw.co/) (you are amazing!)
 - Icons by [Icons8](https://icons8.com/)
 - Icons by [Flaticon](https://www.flaticon.com/)

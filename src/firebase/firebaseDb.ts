@@ -3,7 +3,6 @@ import {
   ref,
   get,
   getDatabase,
-  connectDatabaseEmulator,
   set,
   update,
   push,
@@ -12,7 +11,7 @@ import {
 import { app } from './firebaseApp'
 
 const db = getDatabase(app)
-connectDatabaseEmulator(db, 'localhost', 9000)
+// connectDatabaseEmulator(db, 'localhost', 9000)
 
 export const getFn = async (url: string = '') => {
   const data = await get(ref(db, url))
@@ -51,7 +50,6 @@ export const updateMultipleFn = async (object: any) => {
     return Promise.reject(error)
   }
 }
-type PTuser = Partial<Tuser>
 export const updateData = async (url: string, payload: any) => {
   // ⚠ No checks
   try {

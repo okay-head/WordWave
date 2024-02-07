@@ -9,6 +9,8 @@ const firebaseConfig = {
   storageBucket: 'wordwave-6ced7.appspot.com',
   messagingSenderId: '547198730664',
   appId: '1:547198730664:web:730a7f0dd759e32b6a1d9d',
+  databaseURL:
+    'https://wordwave-6ced7-default-rtdb.asia-southeast1.firebasedatabase.app',
 }
 
 // Initialize Firebase
