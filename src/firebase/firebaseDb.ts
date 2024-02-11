@@ -30,12 +30,7 @@ export const setFn = async (url: string, payload: Tuser | Ttweet) => {
     return Promise.reject(error)
   }
 }
-// idfk how do i type this
-/* Tobj = {
-  'asfs2424': 'string',
-  payload: {}
-}
- */
+// [IMPROVEMENT] remove any's from codebase
 export const updateMultipleFn = async (object: any) => {
   /* No check for already existing data */
   // const res = await get(ref(db, url))
