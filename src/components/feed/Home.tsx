@@ -30,7 +30,6 @@ export default function Home() {
       .then((res) => {
         setData(Object.values(res))
         setTweets(Object.values(res))
-        // tweetSetter(Object.values(res))
       })
       .catch((err) => console.error(err))
   }, [])

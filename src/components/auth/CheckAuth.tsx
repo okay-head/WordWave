@@ -16,7 +16,3 @@ export default function CheckAuth() {
     </>
   )
 }
-
-// store the user object in context once <SignIN>/ <CreateProfile>
-// logic in their respective profiles
-// need to organize all this logic in one SINGLE component-> <isFinallySignedIn>
