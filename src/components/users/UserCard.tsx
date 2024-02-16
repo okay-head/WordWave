@@ -123,7 +123,6 @@ export default function UserCard({
             <div className='group relative ms-auto'>
               <button
                 disabled
-                //  disabled={auth && user_id == uid}
                 onClick={handleClick}
                 className='inline-flex select-none items-center gap-2 gap-x-1.5 rounded-full bg-accent-pink-500 px-3 py-2 text-xs font-medium text-white transition-all hover:bg-accent-pink-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-accent-pink-900 sm:mt-1.5'
               >
