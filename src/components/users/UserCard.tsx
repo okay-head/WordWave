@@ -30,7 +30,6 @@ export default function UserCard({
         : true
     if (auth && exists) setIsFollowing(true)
   }, [currentUser_following, user_id])
-  // IMPORTANT: Dont forget to re-render the component when the new data takes over the mock data
 
   const handleClick = async () => {
     if (!auth) return
