@@ -10,9 +10,5 @@ export default function CheckAuth() {
     if (!auth) navigate('/')
   }, [auth])
 
-  return (
-    <>
-      <Outlet />
-    </>
-  )
+  return <Outlet />
 }
