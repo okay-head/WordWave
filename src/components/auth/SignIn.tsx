@@ -43,8 +43,8 @@ export default function SignIn() {
   } = useForm<TForm>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'becky@email.com',
+      password: 'beckyemail',
     },
   })
 
